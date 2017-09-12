@@ -17,7 +17,6 @@ public class ProyectoBD1 {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Hola mundo");
-        System.out.println("Soy gerald y soy puto");
     }
     
 }
