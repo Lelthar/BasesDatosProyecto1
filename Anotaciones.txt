@@ -1,0 +1,3 @@
+Preguntas:
+1- MySql
+2- ¿Tablas temporales con mismas restricciones que la tabla original?
