@@ -1,3 +1,6 @@
 Preguntas:
 1- MySql
 2- ¿Tablas temporales con mismas restricciones que la tabla original?
+3- ¿Que se refiere con estas bases de datos?
+     -Al nombre de la base de datos asígnele: bdproy1
+     -Al nombre del esquema asígnele: proy1
