@@ -33,6 +33,7 @@ public class connectURL {
          String SQL = "SELECT * FROM cliente";  
          stmt = con.createStatement();  
          rs = stmt.executeQuery(SQL);  
+         
 
          // Iterate through the data in the result set and display it.  
          while (rs.next()) {  
