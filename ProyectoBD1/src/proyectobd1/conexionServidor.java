@@ -15,15 +15,19 @@ import java.sql.Statement;
  *
  * @author Gerald
  */
-public class conexionServidor {
+public class ConexionServidor {
     String bd;
     String userName;
     String userPassword;
     Connection con;  
     Statement stmt;  
     ResultSet rs;  
-
-    public conexionServidor(String pBd,String pUserName,String pUserPassword) {
+    
+    public ConexionServidor(){
+        
+    }
+    
+    public ConexionServidor(String pBd,String pUserName,String pUserPassword) {
         this.bd = pBd;
         this.userName = pUserName;
         this.userPassword = pUserPassword;
@@ -31,7 +35,15 @@ public class conexionServidor {
         this.stmt = null;
         this.rs = null;
     }
-    
+
+    public ResultSet getRs() {
+        return rs;
+    }
+
+    public void setRs(ResultSet rs) {
+        this.rs = rs;
+    }
+        
     public void hacerConexion(){
         try {  
             // Establece la conexion con la base de datos.  
@@ -43,11 +55,13 @@ public class conexionServidor {
 
       // Muestra los errores ocurridos.  
         catch (Exception e) {  
-           e.printStackTrace();  
+           System.out.println("Error usuario,contraseña o base de datos incorrecto");
+           //e.printStackTrace();  
         }
     }
     
     public void realizarInstruccionSql(int tipo, String consulta) throws SQLException{
+        this.rs = null;
         if(tipo == 0){
             rs = stmt.executeQuery(consulta);  
  

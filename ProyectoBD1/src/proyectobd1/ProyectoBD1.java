@@ -5,6 +5,8 @@
  */
 package proyectobd1;
 
+import frames.servidor;
+
 import java.sql.*;
 
 /**
@@ -22,21 +24,7 @@ public class ProyectoBD1 {
      */
     public static void main(String[] args) throws SQLException {
         // TODO code application logic here
-        conectarBaseDatos();
+        servidor server = new servidor();
+        server.setVisible(true);
     }
-    
-    public static void conectarBaseDatos(){
-        try{
-            Connection con = DriverManager.getConnection("jdbc:odbc:Coneccion_sql");
-            /*Statement sentencia = con.createStatement();
-            ResultSet resultado = sentencia.executeQuery("select * from cliente");
-            while(resultado.next()){
-                System.out.println(resultado.getString("nombre_cliente"));
-            }*/
-        }catch(Exception e){
-            System.out.println("error");
-        }
-    
-    }
-    
 }
