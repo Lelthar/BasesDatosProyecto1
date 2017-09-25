@@ -8,6 +8,7 @@ package proyectobd1;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -22,6 +23,7 @@ public class ConexionServidor {
     Connection con;  
     Statement stmt;  
     ResultSet rs;  
+    ResultSetMetaData rsCantidadColumnas;
     
     public ConexionServidor(){
         
@@ -34,7 +36,10 @@ public class ConexionServidor {
         this.con = null;
         this.stmt = null;
         this.rs = null;
+        this.rsCantidadColumnas = null;
     }
+
+ 
 
     public ResultSet getRs() {
         return rs;
@@ -63,13 +68,17 @@ public class ConexionServidor {
     public void realizarInstruccionSql(int tipo, String consulta) throws SQLException{
         this.rs = null;
         if(tipo == 0){
-            rs = stmt.executeQuery(consulta);  
+            this.rs = stmt.executeQuery(consulta);
+            this.rsCantidadColumnas = rs.getMetaData();
  
             // Recorre las tuplas de la tabla , hay que arreglar las consultas con las columnas
-            while (rs.next()) {  
-               System.out.println(rs.getString(1) + " " + rs.getString(2) + " "+rs.getString(3));  
+            while (rs.next()) {
+                for(int i = 0; i < rsCantidadColumnas.getColumnCount(); i++){
+                    System.out.print(rs.getString(i+1) + " ");  
+                }
+                System.out.println("");
             }
-            System.out.println("Fin de la consulta...");
+            System.out.println("Consulta realizada...");
         }else{
             stmt.executeUpdate(consulta);
             System.out.println("Instruccion sql realizada...");
