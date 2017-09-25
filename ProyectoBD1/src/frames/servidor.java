@@ -144,6 +144,9 @@ public class servidor extends javax.swing.JFrame {
         ConexionServidor pr = new ConexionServidor(jTextBase.getText(),jTextUsu.getText(),jPassUsu.getText());
         Singleton.getInstance().setConexionServidor(pr);
         Singleton.getInstance().getConexionServidor().hacerConexion();
+        Consultas consultas = new Consultas();
+        consultas.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonAceActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
