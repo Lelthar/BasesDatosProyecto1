@@ -5,6 +5,7 @@
  */
 package proyectobd1;
 
+import frames.VentanaSeleccion;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -13,6 +14,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -88,14 +90,13 @@ public class ConexionServidor {
         if(tipo == 0){
             this.rs = stmt.executeQuery(consulta);
             this.rsCantidadColumnas = rs.getMetaData();
- 
             // Recorre las tuplas de la tabla , hay que arreglar las consultas con las columnas
-            while (rs.next()) {
-                for(int i = 0; i < rsCantidadColumnas.getColumnCount(); i++){
-                    System.out.print(rs.getString(i+1) + " ");  
-                }
-                System.out.println("");
-            }
+//            while (rs.next()) {
+//                for(int i = 0; i < rsCantidadColumnas.getColumnCount(); i++){
+//                    System.out.print(rs.getString(i+1) + " ");  
+//                }
+//                System.out.println("");
+//            }
             System.out.println("Consulta realizada...");
         }else{
             stmt.executeUpdate(consulta);
@@ -125,5 +126,47 @@ public class ConexionServidor {
     
     }
     
-    
+    /**
+     * Metodo encargado de extraer los nombres de los atributos de una consulta
+     * @return
+     * @throws SQLException 
+     */
+    public String[] atributosCosulta() throws SQLException{
+        ResultSetMetaData consulta = rs.getMetaData();
+        int columnas = consulta.getColumnCount();
+        String[] atributos = new String[columnas];
+        for(int i=0;i<columnas;i++){
+            //System.out.println(consulta.getColumnName(i+1));        
+            atributos[i]= consulta.getColumnName(i+1);
+        }
+        return atributos;
+    }
+    /**
+     * Metodo encargado de extraer todas las tuplas de una consulta y retornar resultado[][]
+     * @return
+     * @throws SQLException 
+     */
+    public String[][] tuplasConsulta() throws SQLException{
+        ResultSetMetaData consulta = rs.getMetaData();
+        int columna = consulta.getColumnCount();
+        ArrayList<String[]> tuplas = new ArrayList();
+        // Recorre las tuplas de la tabla , hay que arreglar las consultas con las columnas
+        while (rs.next()) {
+            String[] atributos = new String[columna];
+            for(int i = 0; i < columna; i++){
+                //System.out.print(rs.getString(i+1) + " ");
+                atributos[i] = rs.getString(i+1);     
+            }
+            tuplas.add(atributos);
+        }
+        String[][] result = new String[tuplas.size()][columna];
+        for(int i=0;i<tuplas.size();i++){
+            for(int j=0;j<columna;j++){
+                result[i][j]= tuplas.get(i)[j];
+            }
+            
+        }
+        //System.out.println(Arrays.deepToString(result));
+        return result;
+    }
 }
