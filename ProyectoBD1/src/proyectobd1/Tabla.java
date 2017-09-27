@@ -13,10 +13,19 @@ import java.util.ArrayList;
  */
 public class Tabla {
     private String nombre;
+    private Boolean temporal;
     private ArrayList<String> listaAtributos;
     
     public Tabla(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Boolean getTemporal() {
+        return temporal;
+    }
+
+    public void setTemporal(Boolean temporal) {
+        this.temporal = temporal;
     }
 
     public String getNombre() {

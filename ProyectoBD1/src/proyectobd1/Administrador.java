@@ -12,20 +12,20 @@ import java.util.ArrayList;
  * @author mailon2
  */
 public class Administrador {
-    ListaTemporales listaTemporales;
+    ArrayList<Tabla> listaTemporales;
     
     public Administrador(){
-        listaTemporales = new ListaTemporales();
+        listaTemporales = new ArrayList();
     }
 
-    public ListaTemporales getListaTemporales() {
+    public ArrayList<Tabla> getListaTemporales() {
         return listaTemporales;
     }
 
-    public void setListaTemporales(ListaTemporales listaTemporales) {
+    public void setListaTemporales(ArrayList<Tabla> listaTemporales) {
         this.listaTemporales = listaTemporales;
     }
-    
+
     
     
 }
