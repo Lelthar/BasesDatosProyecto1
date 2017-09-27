@@ -143,6 +143,9 @@ public class MenuFunciones extends javax.swing.JFrame {
 
     private void operacionesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operacionesBtnActionPerformed
         // TODO add your handling code here:
+        OperacionesAlgebraRelacional ventana = new OperacionesAlgebraRelacional();
+        ventana.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_operacionesBtnActionPerformed
 
     private void tablasBaseDatosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tablasBaseDatosBtnActionPerformed

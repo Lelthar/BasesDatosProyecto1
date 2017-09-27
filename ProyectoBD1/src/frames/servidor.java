@@ -148,8 +148,10 @@ public class servidor extends javax.swing.JFrame {
         Singleton.getInstance().setConexionServidor(pr);
         Singleton.getInstance().getConexionServidor().hacerConexion();
         if(Singleton.getInstance().getConexionServidor().con != null){
-            VentanaSeleccion ventanaSeleccion = new VentanaSeleccion();
-            ventanaSeleccion.setVisible(true);
+            //VentanaSeleccion ventanaSeleccion = new VentanaSeleccion();
+            //ventanaSeleccion.setVisible(true);
+            MenuFunciones ventana = new MenuFunciones();
+            ventana.setVisible(true);
             this.setVisible(false);
         }
     }//GEN-LAST:event_jButtonAceActionPerformed
