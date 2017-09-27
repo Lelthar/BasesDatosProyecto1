@@ -6,24 +6,28 @@
 package proyectobd1;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
  * @author Gerald
  */
 public class ConexionServidor {
-    String bd;
-    String userName;
-    String userPassword;
-    Connection con;  
-    Statement stmt;  
-    ResultSet rs;  
-    ResultSetMetaData rsCantidadColumnas;
+    public String bd;
+    public String userName;
+    public String userPassword;
+    public Connection con;  
+    public Statement stmt;  
+    public ResultSet rs;
+    public DatabaseMetaData metaDatos;
+    public ResultSetMetaData rsCantidadColumnas;
+    public ArrayList<String> listaTablas;
     
     public ConexionServidor(){
         
@@ -37,9 +41,19 @@ public class ConexionServidor {
         this.stmt = null;
         this.rs = null;
         this.rsCantidadColumnas = null;
+        this.metaDatos = null;
+        this.listaTablas = new ArrayList<>();
     }
 
- 
+    public void agregarNombreTabla(String nombreTabla){
+        this.listaTablas.add(nombreTabla);
+    }
+    
+    public void mostrarNombreTablas(){
+        for(int i = 0; i < this.listaTablas.size(); i++){
+            System.out.println(listaTablas.get(i));
+        }
+    }
 
     public ResultSet getRs() {
         return rs;
@@ -54,7 +68,11 @@ public class ConexionServidor {
             // Establece la conexion con la base de datos.  
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
             this.con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName="+bd+";",userName,userPassword);  
-            this.stmt = this.con.createStatement(); 
+            this.stmt = this.con.createStatement();
+            this.metaDatos = con.getMetaData();
+            agregarListaTablas();
+            mostrarNombreTablas();
+            System.out.println(existeTablaP("clientes"));
             System.out.println("Conexion establecida...");
         }  
 
@@ -83,6 +101,28 @@ public class ConexionServidor {
             stmt.executeUpdate(consulta);
             System.out.println("Instruccion sql realizada...");
         }  
+    }
+    
+    public void agregarListaTablas() throws SQLException{
+        if(con != null){
+            String[] types = {"TABLE"};
+            rs = metaDatos.getTables(null, "dbo", "%", types);
+            while (rs.next()) {
+                agregarNombreTabla(rs.getString(3));
+            }
+            
+            System.out.println("Se agregaron existosamente los nombres de las tablas...");
+        }
+    }
+    
+    public boolean existeTablaP(String nombreTabla){
+        for(int i = 0; i < this.listaTablas.size(); i++){
+            if(this.listaTablas.get(i).equals(nombreTabla)){
+                return true;
+            }
+        }
+        return false;
+    
     }
     
     
