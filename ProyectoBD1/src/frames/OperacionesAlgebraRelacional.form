@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="330" max="-2" attributes="0"/>
+                      <Component id="jButtonSalir" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jButtonDiferenciaConjuntos" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jButtonProyeccion" alignment="1" pref="139" max="32767" attributes="0"/>
+                              <Component id="jButtonSeleccion" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jButtonUnion" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jButtonProductoCartesiano" min="-2" pref="139" max="-2" attributes="0"/>
+                          <Component id="jButtonIntersecion" min="-2" pref="139" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Component id="jButtonConcatenacion" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jButtonDivision" max="32767" attributes="0"/>
+                                  <Component id="jButtonRenombrar" pref="139" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jButtonConcaNatural" max="32767" attributes="0"/>
+                              <Component id="jButtonAgregación" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jButtonAgrupación" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonSeleccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonDivision" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonProyeccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonRenombrar" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonUnion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonConcatenacion" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonDiferenciaConjuntos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonConcaNatural" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonProductoCartesiano" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonAgregación" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonIntersecion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonAgrupación" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="90" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jButtonSalir" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JButton" name="jButtonSeleccion">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Selecci&#xf3;n"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSeleccionActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonProyeccion">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Proyecci&#xf3;n"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonUnion">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Uni&#xf3;n"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonDiferenciaConjuntos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Diferecia de conjuntos"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonProductoCartesiano">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Producto Cartesiano"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonIntersecion">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Intersecci&#xf3;n"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonDivision">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Divisi&#xf3;n"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonRenombrar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Renombrar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonConcatenacion">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Concatenaci&#xf3;n"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonConcaNatural">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Concatenaci&#xf3;n Natural"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonAgregaci&#xf3;n">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Agregaci&#xf3;n"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAgregaci&#xf3;nActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonAgrupaci&#xf3;n">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Agrupaci&#xf3;n"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonSalir">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Salir"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
