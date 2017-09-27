@@ -5,6 +5,9 @@
  */
 package frames;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import proyectobd1.ConexionServidor;
 import proyectobd1.Singleton;
 /**
@@ -144,9 +147,11 @@ public class servidor extends javax.swing.JFrame {
         ConexionServidor pr = new ConexionServidor(jTextBase.getText(),jTextUsu.getText(),jPassUsu.getText());
         Singleton.getInstance().setConexionServidor(pr);
         Singleton.getInstance().getConexionServidor().hacerConexion();
-        Consultas consultas = new Consultas();
-        consultas.setVisible(true);
-        this.setVisible(false);
+        if(Singleton.getInstance().getConexionServidor().con != null){
+            VentanaSeleccion ventanaSeleccion = new VentanaSeleccion();
+            ventanaSeleccion.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jButtonAceActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
