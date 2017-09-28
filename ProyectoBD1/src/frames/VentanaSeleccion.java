@@ -62,13 +62,13 @@ public class VentanaSeleccion extends javax.swing.JFrame {
 
         jTableSelecc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane2.setViewportView(jTableSelecc);
@@ -154,9 +154,9 @@ public class VentanaSeleccion extends javax.swing.JFrame {
                     Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0, consulta);
                     Tabla nuevaTabla = new Tabla(txfTablaResultado.getText(),true,Singleton.getInstance().getConexionServidor().convertirVector2ArrayList(Singleton.getInstance().getConexionServidor().atributosCosulta()));
                     Singleton.getInstance().getConexionServidor().agregarNombreTabla(nuevaTabla);
-                    //Desde aqui estaba haciendo la prueba
-                    Singleton.getInstance().getConexionServidor().atributosCosulta();
-                    Singleton.getInstance().getConexionServidor().tuplasConsulta();
+                    //Funcion que hace la llamada para ver en la interfaz
+                    Singleton.getInstance().getAdministrador().tablaSeleccion(this);
+                    
                 } catch (SQLException ex) {
                     Logger.getLogger(VentanaSeleccion.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -174,6 +174,7 @@ public class VentanaSeleccion extends javax.swing.JFrame {
                         nombreTabla = txfNombreTabla.getText();
                     }
                     Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM "+nombreTabla+" WHERE "+txfPredicado.getText());
+                    Singleton.getInstance().getAdministrador().tablaSeleccion(this);
                 } catch (SQLException ex) {
                     Logger.getLogger(VentanaSeleccion.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -224,8 +225,8 @@ public class VentanaSeleccion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTableSelecc;
+    public javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JTable jTableSelecc;
     private javax.swing.JTextField txfNombreTabla;
     private javax.swing.JTextField txfPredicado;
     private javax.swing.JTextField txfTablaResultado;

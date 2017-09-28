@@ -5,7 +5,10 @@
  */
 package proyectobd1;
 
+import frames.VentanaSeleccion;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -26,6 +29,18 @@ public class Administrador {
         this.listaTemporales = listaTemporales;
     }
 
-    
+    /**
+     * Metodo que permite cargas los datos en la tabla de la ventana Selección.
+     * @param ventana
+     * @throws SQLException 
+     */
+    public  void tablaSeleccion(VentanaSeleccion ventana) throws SQLException{
+        String[] atributos = Singleton.getInstance().getConexionServidor().atributosCosulta();
+        String[][] datos = Singleton.getInstance().getConexionServidor().tuplasConsulta();
+        
+        DefaultTableModel modelo = new DefaultTableModel(datos,atributos);
+        
+        ventana.jTableSelecc.setModel(modelo);
+    }
     
 }
