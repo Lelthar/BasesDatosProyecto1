@@ -131,6 +131,46 @@ public class ConexionServidor {
     
     }
     
+    /**
+     * Esta funcion devuelve los atributos de una tabla
+     * @param nombre
+     * @return resultado
+     */
+    public ArrayList<String> obtenerAtributos(String nombre){
+        ArrayList<String> resultado = new ArrayList<>();
+        for(int i = 0; i < this.listaTablas.size(); i++){
+            if(this.listaTablas.get(i).getNombre().equals(nombre)){
+                resultado = this.listaTablas.get(i).getListaAtributos();
+                return resultado;
+            }
+        } 
+        return resultado;
+    }
+    
+    
+    /**
+     * Esta funcion compara todos los elementos de dos tablas
+     * @param atributos1
+     * @param atributos2
+     * @return boolean
+     */
+    public boolean atributosIgualesP(ArrayList<String> atributos1, ArrayList<String> atributos2){
+        if(atributos1.size() == atributos2.size()){
+            for(int i = 0; i < atributos1.size(); i++){
+                if(!atributos1.get(i).equals(atributos2.get(i))){
+                    return false;
+                }
+            }
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    /**
+     * Esta funcion revisa si una tabla es temporal o no
+     * 
+     */
     public boolean esTablaTemporalP(String nombreTabla){
         for(int i = 0; i < this.listaTablas.size(); i++){
             if(this.listaTablas.get(i).getNombre().equals(nombreTabla) && this.listaTablas.get(i).getTemporal()){

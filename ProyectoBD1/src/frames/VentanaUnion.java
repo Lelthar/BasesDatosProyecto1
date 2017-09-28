@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import proyectobd1.Singleton;
+import proyectobd1.Tabla;
 
 /**
  *
@@ -40,6 +41,8 @@ public class VentanaUnion extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txAResultadoConsulta = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        txfTablaResultado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,6 +61,8 @@ public class VentanaUnion extends javax.swing.JFrame {
         txAResultadoConsulta.setRows(5);
         jScrollPane1.setViewportView(txAResultadoConsulta);
 
+        jLabel3.setText("Tabla  resultado:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -70,32 +75,44 @@ public class VentanaUnion extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(21, 21, 21)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(21, 21, 21))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txfNombreTabla2, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                                    .addComponent(txfNombreTabla1))))
-                        .addGap(162, 162, 162)
+                                    .addComponent(txfNombreTabla2)
+                                    .addComponent(txfNombreTabla1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txfTablaResultado))))
+                        .addGap(149, 149, 149)
                         .addComponent(ejecutarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(ejecutarBtn))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txfNombreTabla1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
+                        .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txfNombreTabla2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)))
-                    .addComponent(ejecutarBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                            .addComponent(jLabel2))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txfTablaResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addGap(29, 29, 29))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -114,7 +131,73 @@ public class VentanaUnion extends javax.swing.JFrame {
 
     private void ejecutarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarBtnActionPerformed
         // TODO add your handling code here:
-       
+       if(!txfTablaResultado.getText().isEmpty()){
+           if(Singleton.getInstance().getConexionServidor().existeTablaP(txfNombreTabla1.getText()) && Singleton.getInstance().getConexionServidor().existeTablaP(txfNombreTabla2.getText())){
+               if(Singleton.getInstance().getConexionServidor().atributosIgualesP(Singleton.getInstance().getConexionServidor().obtenerAtributos(txfNombreTabla1.getText()), Singleton.getInstance().getConexionServidor().obtenerAtributos(txfNombreTabla2.getText()))){
+                    String nombreTabla1;
+                    String nombreTabla2;
+                    if(Singleton.getInstance().getConexionServidor().esTablaTemporalP(txfNombreTabla1.getText())){
+                        nombreTabla1 = "#"+txfNombreTabla1.getText();
+                    }else{
+                        nombreTabla1 = txfNombreTabla1.getText();
+                    }
+                    if(Singleton.getInstance().getConexionServidor().esTablaTemporalP(txfNombreTabla2.getText())){
+                        nombreTabla2 = "#"+txfNombreTabla2.getText();
+                    }else{
+                        nombreTabla2 = txfNombreTabla2.getText();
+                    }
+                    
+                   try {
+                        Singleton.getInstance().getConexionServidor().realizarInstruccionSql(1,"SELECT * INTO  #"+txfTablaResultado.getText()+" FROM "+nombreTabla1+" UNION SELECT * FROM "+nombreTabla2);
+                        Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM #"+txfTablaResultado.getText());
+                        Singleton.getInstance().getConexionServidor().setRs(null);
+                        String consulta = "SELECT * FROM #"+txfTablaResultado.getText();
+                        Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0, consulta);
+                        Tabla nuevaTabla = new Tabla(txfTablaResultado.getText(),true,Singleton.getInstance().getConexionServidor().convertirVector2ArrayList(Singleton.getInstance().getConexionServidor().atributosCosulta()));
+                        Singleton.getInstance().getConexionServidor().agregarNombreTabla(nuevaTabla);
+                        //Funcion que hace la llamada para ver en la interfaz
+                        //Singleton.getInstance().getAdministrador().tablaSeleccion(this);
+                   } catch (SQLException ex) {
+                       Logger.getLogger(VentanaUnion.class.getName()).log(Level.SEVERE, null, ex);
+                    }    
+                    
+               }else{
+                   System.out.println("Las tablas no tienen la misma aridad");
+               }
+           }else{
+               System.out.println("Una de las tablas no existe");
+           }  
+       }else{
+           if(Singleton.getInstance().getConexionServidor().existeTablaP(txfNombreTabla1.getText()) && Singleton.getInstance().getConexionServidor().existeTablaP(txfNombreTabla2.getText())){
+               if(Singleton.getInstance().getConexionServidor().atributosIgualesP(Singleton.getInstance().getConexionServidor().obtenerAtributos(txfNombreTabla1.getText()), Singleton.getInstance().getConexionServidor().obtenerAtributos(txfNombreTabla2.getText()))){
+                    String nombreTabla1;
+                    String nombreTabla2;
+                    if(Singleton.getInstance().getConexionServidor().esTablaTemporalP(txfNombreTabla1.getText())){
+                        nombreTabla1 = "#"+txfNombreTabla1.getText();
+                    }else{
+                        nombreTabla1 = txfNombreTabla1.getText();
+                    }
+                    if(Singleton.getInstance().getConexionServidor().esTablaTemporalP(txfNombreTabla2.getText())){
+                        nombreTabla2 = "#"+txfNombreTabla2.getText();
+                    }else{
+                        nombreTabla2 = txfNombreTabla2.getText();
+                    }
+                    
+                   try {
+                        Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM "+nombreTabla1+" UNION SELECT * FROM "+nombreTabla2);
+                        //Funcion que hace la llamada para ver en la interfaz
+                        //Singleton.getInstance().getAdministrador().tablaSeleccion(this);
+                   } catch (SQLException ex) {
+                       Logger.getLogger(VentanaUnion.class.getName()).log(Level.SEVERE, null, ex);
+                    }    
+                    
+               }else{
+                   System.out.println("Las tablas no tienen la misma aridad");
+               }
+           }else{
+               System.out.println("Una de las tablas no existe");
+           }
+       }
     }//GEN-LAST:event_ejecutarBtnActionPerformed
 
     /**
@@ -157,10 +240,12 @@ public class VentanaUnion extends javax.swing.JFrame {
     private javax.swing.JButton ejecutarBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txAResultadoConsulta;
     private javax.swing.JTextField txfNombreTabla1;
     private javax.swing.JTextField txfNombreTabla2;
+    private javax.swing.JTextField txfTablaResultado;
     // End of variables declaration//GEN-END:variables
 }

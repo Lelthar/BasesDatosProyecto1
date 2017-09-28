@@ -53,6 +53,11 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
         jButtonProyeccion.setText("Proyección");
 
         jButtonUnion.setText("Unión");
+        jButtonUnion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUnionActionPerformed(evt);
+            }
+        });
 
         jButtonDiferenciaConjuntos.setText("Diferecia de conjuntos");
 
@@ -158,6 +163,13 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
         ventanaSeleccion.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonSeleccionActionPerformed
+
+    private void jButtonUnionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUnionActionPerformed
+        // TODO add your handling code here:
+        VentanaUnion ventanaUnion = new VentanaUnion();
+        ventanaUnion.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonUnionActionPerformed
 
     /**
      * @param args the command line arguments
