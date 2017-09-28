@@ -20,6 +20,12 @@ public class Tabla {
         this.nombre = nombre;
     }
 
+    public Tabla(String nombre, Boolean temporal, ArrayList<String> listaAtributos) {
+        this.nombre = nombre;
+        this.temporal = temporal;
+        this.listaAtributos = listaAtributos;
+    }
+
     public Boolean getTemporal() {
         return temporal;
     }
@@ -36,5 +42,13 @@ public class Tabla {
         this.nombre = nombre;
     }
     
+    public void imprimirTabla(){
+        System.out.println("Nombre tabla: "+nombre);
+        System.out.println("Atributos: ");
+        for(int i = 0; i < listaAtributos.size(); i++){
+            System.out.print(listaAtributos.get(i)+" ");
+        }
+        System.out.println("");
+    }
     
 }

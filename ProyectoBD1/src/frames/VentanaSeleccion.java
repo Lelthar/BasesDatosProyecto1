@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import proyectobd1.Singleton;
+import proyectobd1.Tabla;
 
 /**
  *
@@ -139,10 +140,21 @@ public class VentanaSeleccion extends javax.swing.JFrame {
         if(!txfTablaResultado.getText().isEmpty()){
             if(Singleton.getInstance().getConexionServidor().existeTablaP(txfNombreTabla.getText())){
                 try {
-                    Singleton.getInstance().getConexionServidor().realizarInstruccionSql(1,"SELECT * INTO  #"+txfTablaResultado.getText()+" FROM "+txfNombreTabla.getText()+" where "+txfPredicado.getText());
+                    String nombreTabla;
+                    if(Singleton.getInstance().getConexionServidor().esTablaTemporalP(txfNombreTabla.getText())){
+                        nombreTabla = "#"+txfNombreTabla.getText();
+                    }else{
+                        nombreTabla = txfNombreTabla.getText();
+                    }
+                    Singleton.getInstance().getConexionServidor().realizarInstruccionSql(1,"SELECT * INTO  #"+txfTablaResultado.getText()+" FROM "+nombreTabla+" where "+txfPredicado.getText());
                     Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM #"+txfTablaResultado.getText());
-                    Singleton.getInstance().getConexionServidor().agregarNombreTabla("#"+txfTablaResultado.getText());
-                     //Desde aqui estaba haciendo la prueba
+                    //Singleton.getInstance().getConexionServidor().agregarNombreTabla("#"+txfTablaResultado.getText());
+                    Singleton.getInstance().getConexionServidor().setRs(null);
+                    String consulta = "SELECT * FROM #"+txfTablaResultado.getText();
+                    Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0, consulta);
+                    Tabla nuevaTabla = new Tabla(txfTablaResultado.getText(),true,Singleton.getInstance().getConexionServidor().convertirVector2ArrayList(Singleton.getInstance().getConexionServidor().atributosCosulta()));
+                    Singleton.getInstance().getConexionServidor().agregarNombreTabla(nuevaTabla);
+                    //Desde aqui estaba haciendo la prueba
                     Singleton.getInstance().getConexionServidor().atributosCosulta();
                     Singleton.getInstance().getConexionServidor().tuplasConsulta();
                 } catch (SQLException ex) {
@@ -155,7 +167,13 @@ public class VentanaSeleccion extends javax.swing.JFrame {
         }else{
             if(Singleton.getInstance().getConexionServidor().existeTablaP(txfNombreTabla.getText())){
                 try {
-                    Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM "+txfNombreTabla.getText()+" WHERE "+txfPredicado.getText());
+                    String nombreTabla;
+                    if(Singleton.getInstance().getConexionServidor().esTablaTemporalP(txfNombreTabla.getText())){
+                        nombreTabla = "#"+txfNombreTabla.getText();
+                    }else{
+                        nombreTabla = txfNombreTabla.getText();
+                    }
+                    Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM "+nombreTabla+" WHERE "+txfPredicado.getText());
                 } catch (SQLException ex) {
                     Logger.getLogger(VentanaSeleccion.class.getName()).log(Level.SEVERE, null, ex);
                 }

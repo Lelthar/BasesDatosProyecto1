@@ -29,7 +29,8 @@ public class ConexionServidor {
     public ResultSet rs;
     public DatabaseMetaData metaDatos;
     public ResultSetMetaData rsCantidadColumnas;
-    public ArrayList<String> listaTablas;
+    //public ArrayList<String> listaTablas;
+    ArrayList<Tabla> listaTablas;
     
     public ConexionServidor(){
         
@@ -47,8 +48,8 @@ public class ConexionServidor {
         this.listaTablas = new ArrayList<>();
     }
 
-    public void agregarNombreTabla(String nombreTabla){
-        this.listaTablas.add(nombreTabla);
+    public void agregarNombreTabla(Tabla nuevaTabla){
+        this.listaTablas.add(nuevaTabla);
     }
     
     public void mostrarNombreTablas(){
@@ -73,7 +74,6 @@ public class ConexionServidor {
             this.stmt = this.con.createStatement();
             this.metaDatos = con.getMetaData();
             agregarListaTablas();
-            mostrarNombreTablas();
             System.out.println(existeTablaP("clientes"));
             System.out.println("Conexion establecida...");
         }  
@@ -106,10 +106,15 @@ public class ConexionServidor {
     
     public void agregarListaTablas() throws SQLException{
         if(con != null){
+             ResultSet result = null;
             String[] types = {"TABLE"};
-            rs = metaDatos.getTables(null, "dbo", "%", types);
-            while (rs.next()) {
-                agregarNombreTabla(rs.getString(3));
+            result = metaDatos.getTables(null, "dbo", "%", types);
+            while (result.next()) {
+                this.rs = null;
+                String consulta = "SELECT * FROM "+result.getString(3);
+                realizarInstruccionSql(0, consulta);
+                Tabla nuevaTabla = new Tabla(result.getString(3),false,convertirVector2ArrayList(atributosCosulta()));
+                agregarNombreTabla(nuevaTabla);
             }
             
             System.out.println("Se agregaron existosamente los nombres de las tablas...");
@@ -118,12 +123,34 @@ public class ConexionServidor {
     
     public boolean existeTablaP(String nombreTabla){
         for(int i = 0; i < this.listaTablas.size(); i++){
-            if(this.listaTablas.get(i).equals(nombreTabla)){
+            if(this.listaTablas.get(i).getNombre().equals(nombreTabla)){
                 return true;
             }
         }
         return false;
     
+    }
+    
+    public boolean esTablaTemporalP(String nombreTabla){
+        for(int i = 0; i < this.listaTablas.size(); i++){
+            if(this.listaTablas.get(i).getNombre().equals(nombreTabla) && this.listaTablas.get(i).getTemporal()){
+                return true;
+            }
+        }
+        return false;
+    
+    }
+    
+    /**
+     * Metodo sirve para convertir de un vector de string a un arraylist de string
+     * 
+     */
+    public ArrayList<String> convertirVector2ArrayList(String[] vector) throws SQLException{
+        ArrayList<String> lista = new ArrayList<>();
+        for(int i=0;i<vector.length;i++){
+            lista.add(vector[i]);
+        }
+        return lista;
     }
     
     /**

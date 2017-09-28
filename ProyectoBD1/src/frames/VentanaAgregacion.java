@@ -130,7 +130,7 @@ public class VentanaAgregacion extends javax.swing.JFrame {
                 try {
                     Singleton.getInstance().getConexionServidor().realizarInstruccionSql(1,"SELECT * INTO  #"+txfTablaResultado.getText()+" FROM "+txfNombreTabla.getText()+" where "+txfListaOperacionesAgregacion.getText());
                     Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM #"+txfTablaResultado.getText());
-                    Singleton.getInstance().getConexionServidor().agregarNombreTabla("#"+txfTablaResultado.getText());
+                    //Singleton.getInstance().getConexionServidor().agregarNombreTabla("#"+txfTablaResultado.getText());
                 } catch (SQLException ex) {
                     Logger.getLogger(VentanaAgregacion.class.getName()).log(Level.SEVERE, null, ex);
                 }
