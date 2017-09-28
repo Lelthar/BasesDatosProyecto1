@@ -26,6 +26,14 @@ public class Tabla {
         this.listaAtributos = listaAtributos;
     }
 
+    public ArrayList<String> getListaAtributos() {
+        return listaAtributos;
+    }
+
+    public void setListaAtributos(ArrayList<String> listaAtributos) {
+        this.listaAtributos = listaAtributos;
+    }
+
     public Boolean getTemporal() {
         return temporal;
     }
