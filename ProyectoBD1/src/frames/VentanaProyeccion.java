@@ -104,7 +104,7 @@ public class VentanaProyeccion extends javax.swing.JFrame {
 
         jLabel4.setText("Equivalente en SQL:");
 
-        jLabel5.setText("Equivalente e Álgebra Relacional:");
+        jLabel5.setText("Equivalente en Álgebra Relacional:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
