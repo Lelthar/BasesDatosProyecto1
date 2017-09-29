@@ -153,10 +153,16 @@ public class MenuFunciones extends javax.swing.JFrame {
 
     private void tablasBaseDatosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tablasBaseDatosBtnActionPerformed
         // TODO add your handling code here:
+        tablaBaseDatos ventana = new tablaBaseDatos();
+        ventana.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_tablasBaseDatosBtnActionPerformed
 
     private void tablasTemporalesBDBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tablasTemporalesBDBtn1ActionPerformed
         // TODO add your handling code here:
+        tablaTempoBaseDatos ventana = new tablaTempoBaseDatos();
+        ventana.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_tablasTemporalesBDBtn1ActionPerformed
 
     private void verReferenciaCruzadaAtributoTablaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verReferenciaCruzadaAtributoTablaBtnActionPerformed
