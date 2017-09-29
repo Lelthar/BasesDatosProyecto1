@@ -10,12 +10,25 @@ package frames;
  * @author mailon2
  */
 public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
-
+    
+    VentanaSeleccion ventanaSeleccion;
+    VentanaUnion ventanaUnion;
+    VentanaRenombrarAtributos ventanaRenombrar;
+    VentanaDiferenciaConjuntos ventanaDiferenciaConjuntos;
+    VentanaConcatenacion ventanaConcatenacion;
+    VentanaAgregacion ventanaAgregacion;
     /**
      * Creates new form OperacionesAlgebraRelacional
      */
     public OperacionesAlgebraRelacional() {
         initComponents();
+        ventanaSeleccion = new VentanaSeleccion(this);
+        ventanaUnion = new VentanaUnion(this);
+        ventanaRenombrar = new VentanaRenombrarAtributos(this);
+        ventanaDiferenciaConjuntos = new VentanaDiferenciaConjuntos(this);
+        ventanaConcatenacion = new VentanaConcatenacion(this);
+        ventanaAgregacion = new VentanaAgregacion(this);
+        
     }
 
     /**
@@ -60,6 +73,11 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
         });
 
         jButtonDiferenciaConjuntos.setText("Diferecia de conjuntos");
+        jButtonDiferenciaConjuntos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDiferenciaConjuntosActionPerformed(evt);
+            }
+        });
 
         jButtonProductoCartesiano.setText("Producto Cartesiano");
 
@@ -68,8 +86,18 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
         jButtonDivision.setText("División");
 
         jButtonRenombrar.setText("Renombrar");
+        jButtonRenombrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRenombrarActionPerformed(evt);
+            }
+        });
 
         jButtonConcatenacion.setText("Concatenación");
+        jButtonConcatenacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConcatenacionActionPerformed(evt);
+            }
+        });
 
         jButtonConcaNatural.setText("Concatenación Natural");
 
@@ -83,6 +111,11 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
         jButtonAgrupación.setText("Agrupación");
 
         jButtonSalir.setText("Salir");
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,21 +188,43 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
 
     private void jButtonAgregaciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregaciónActionPerformed
         // TODO add your handling code here:
+        this.ventanaAgregacion.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonAgregaciónActionPerformed
 
     private void jButtonSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionActionPerformed
         // TODO add your handling code here:
-        VentanaSeleccion ventanaSeleccion = new VentanaSeleccion();
-        ventanaSeleccion.setVisible(true);
+        this.ventanaSeleccion.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonSeleccionActionPerformed
 
     private void jButtonUnionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUnionActionPerformed
         // TODO add your handling code here:
-        VentanaUnion ventanaUnion = new VentanaUnion();
-        ventanaUnion.setVisible(true);
+        this.ventanaUnion.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonUnionActionPerformed
+
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSalirActionPerformed
+
+    private void jButtonRenombrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRenombrarActionPerformed
+        // TODO add your handling code here:
+        this.ventanaRenombrar.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonRenombrarActionPerformed
+
+    private void jButtonDiferenciaConjuntosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDiferenciaConjuntosActionPerformed
+        // TODO add your handling code here:
+        this.ventanaDiferenciaConjuntos.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonDiferenciaConjuntosActionPerformed
+
+    private void jButtonConcatenacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConcatenacionActionPerformed
+        // TODO add your handling code here:
+        this.ventanaConcatenacion.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonConcatenacionActionPerformed
 
     /**
      * @param args the command line arguments
