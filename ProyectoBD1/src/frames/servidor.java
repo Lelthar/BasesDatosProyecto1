@@ -8,6 +8,7 @@ package frames;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import proyectobd1.ConexionServidor;
 import proyectobd1.Singleton;
 /**
@@ -144,15 +145,23 @@ public class servidor extends javax.swing.JFrame {
 
     private void jButtonAceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceActionPerformed
         // TODO add your handling code here:
-        ConexionServidor pr = new ConexionServidor(jTextBase.getText(),jTextUsu.getText(),jPassUsu.getText());
-        Singleton.getInstance().setConexionServidor(pr);
-        Singleton.getInstance().getConexionServidor().hacerConexion();
-        if(Singleton.getInstance().getConexionServidor().con != null){
-            //VentanaSeleccion ventanaSeleccion = new VentanaSeleccion();
-            //ventanaSeleccion.setVisible(true);
-            MenuFunciones ventana = new MenuFunciones();
-            ventana.setVisible(true);
-            this.setVisible(false);
+        if(!jTextBase.getText().isEmpty() && !jTextUsu.getText().isEmpty() && !jPassUsu.getText().isEmpty()){
+            ConexionServidor pr = new ConexionServidor(jTextBase.getText(),jTextUsu.getText(),jPassUsu.getText());
+            Singleton.getInstance().setConexionServidor(pr);
+            Singleton.getInstance().getConexionServidor().hacerConexion();
+            if(Singleton.getInstance().getConexionServidor().con != null){
+                //VentanaSeleccion ventanaSeleccion = new VentanaSeleccion();
+                //ventanaSeleccion.setVisible(true);
+                MenuFunciones ventana = new MenuFunciones();
+                ventana.setVisible(true);
+                this.setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog(this, "No se establecio conexión, vuelva a intentarlo"
+                                , "Error inesperado", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Complete todos los datos"
+                                    , "Datos incompletos", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonAceActionPerformed
 
