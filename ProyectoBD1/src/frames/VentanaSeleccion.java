@@ -165,12 +165,13 @@ public class VentanaSeleccion extends javax.swing.JFrame {
                     }
                     Singleton.getInstance().getConexionServidor().realizarInstruccionSql(1,"SELECT * INTO  #"+txfTablaResultado.getText()+" FROM "+nombreTabla+" where "+txfPredicado.getText());
                     Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM #"+txfTablaResultado.getText());
-                    //Singleton.getInstance().getConexionServidor().agregarNombreTabla("#"+txfTablaResultado.getText());
                     Singleton.getInstance().getConexionServidor().setRs(null);
+                    
                     String consulta = "SELECT * FROM #"+txfTablaResultado.getText();
                     Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0, consulta);
                     Tabla nuevaTabla = new Tabla(txfTablaResultado.getText(),true,Singleton.getInstance().getConexionServidor().convertirVector2ArrayList(Singleton.getInstance().getConexionServidor().atributosCosulta()));
                     Singleton.getInstance().getConexionServidor().agregarNombreTabla(nuevaTabla);
+                    
                     //Funcion que hace la llamada para ver en la interfaz
                     Singleton.getInstance().getAdministrador().tablaSeleccion(this);
                     

@@ -16,6 +16,9 @@ public class MenuFunciones extends javax.swing.JFrame {
      */
     public MenuFunciones() {
         initComponents();
+        this.setTitle("Menu de operaciones del programa");
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**
@@ -166,6 +169,8 @@ public class MenuFunciones extends javax.swing.JFrame {
 
     private void salirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBtnActionPerformed
         // TODO add your handling code here:
+        dispose();
+        System.exit(0);                   
     }//GEN-LAST:event_salirBtnActionPerformed
 
     /**
