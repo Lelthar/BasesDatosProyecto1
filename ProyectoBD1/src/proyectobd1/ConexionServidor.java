@@ -236,4 +236,31 @@ public class ConexionServidor {
         //System.out.println(Arrays.deepToString(result));
         return result;
     }
+    public ArrayList<String> convertirStringVector(String string){
+        ArrayList<String> result = new ArrayList();
+        String cadena = "";
+        for(int i =0; i<string.length();i++){
+            if(string.charAt(i)==','){
+                result.add(cadena);
+                cadena="";
+            }else{
+                if(!(string.charAt(i)==' ')){
+                    cadena+=string.charAt(i);
+                }
+            }
+        }
+        result.add(cadena);
+        return result;
+    }
+    
+    public boolean validarAtributos(String nombreTabla,String atributos){
+        ArrayList<String> listaA = obtenerAtributos(nombreTabla);
+        ArrayList<String> listaO = convertirStringVector(atributos);
+        for(int i=0;i<listaO.size();i++){
+            if(!listaA.contains(listaO.get(i))){
+                return false;
+            }
+        }
+        return true;
+    }
 }

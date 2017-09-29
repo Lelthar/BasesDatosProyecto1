@@ -16,10 +16,16 @@ public class Tabla {
     private Boolean temporal;
     private ArrayList<String> listaAtributos;
     
+    public Tabla(){
+        this.nombre=null;
+        this.temporal=null;
+        this.listaAtributos = new ArrayList();
+    }
+    
     public Tabla(String nombre) {
         this.nombre = nombre;
     }
-
+    
     public Tabla(String nombre, Boolean temporal, ArrayList<String> listaAtributos) {
         this.nombre = nombre;
         this.temporal = temporal;
