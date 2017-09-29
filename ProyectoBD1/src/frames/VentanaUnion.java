@@ -228,6 +228,7 @@ public class VentanaUnion extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.ventanaOperaciones.setVisible(true);
         this.setVisible(false);
+        this.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
   

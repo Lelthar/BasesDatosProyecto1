@@ -31,30 +31,22 @@
                       <Component id="jButtonSalir" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jButtonDiferenciaConjuntos" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jButtonProyeccion" alignment="1" pref="139" max="32767" attributes="0"/>
-                              <Component id="jButtonSeleccion" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jButtonUnion" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="jButtonProductoCartesiano" min="-2" pref="139" max="-2" attributes="0"/>
-                          <Component id="jButtonIntersecion" min="-2" pref="139" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jButtonProyeccion" max="32767" attributes="0"/>
+                          <Component id="jButtonUnion" alignment="1" pref="150" max="32767" attributes="0"/>
+                          <Component id="jButtonSeleccion" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jButtonDiferenciaConjuntos" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jButtonProductoCartesiano" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jButtonIntersecion" alignment="1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                              <Component id="jButtonConcatenacion" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jButtonDivision" max="32767" attributes="0"/>
-                                  <Component id="jButtonRenombrar" pref="139" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jButtonConcaNatural" max="32767" attributes="0"/>
-                              <Component id="jButtonAgregación" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jButtonAgrupación" alignment="0" max="32767" attributes="0"/>
-                          </Group>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jButtonConcatenacion" max="32767" attributes="0"/>
+                          <Component id="jButtonConcaNatural" pref="150" max="32767" attributes="0"/>
+                          <Component id="jButtonAgregación" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jButtonAgrupación" max="32767" attributes="0"/>
+                          <Component id="jButtonDivision" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jButtonRenombrar" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -118,6 +110,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Proyecci&#xf3;n"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonProyeccionActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonUnion">
       <Properties>
