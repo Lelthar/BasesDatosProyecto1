@@ -210,32 +210,44 @@ public class VentanaProyeccion extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(!jTextFieldResult.getText().isEmpty()){
             if(Singleton.getInstance().getConexionServidor().existeTablaP(jTextFieldTabla.getText())){
-                try{
-                String nombreTabla;
-                if(Singleton.getInstance().getConexionServidor().esTablaTemporalP(jTextFieldTabla.getText())){
-                    nombreTabla = "#"+jTextFieldTabla.getText();
+                if((Singleton.getInstance().getConexionServidor().existeTablaP(jTextFieldResult.getText()) != true) && 
+                        (Singleton.getInstance().getConexionServidor().esTablaTemporalP(jTextFieldResult.getText()) != true)){
+                    if(Singleton.getInstance().getConexionServidor().validarAtributos(jTextFieldTabla.getText(),jTextFieldExpr.getText()) || "*".equals(jTextFieldExpr.getText())){    
+                        try{
+                        String nombreTabla;
+                        if(Singleton.getInstance().getConexionServidor().esTablaTemporalP(jTextFieldTabla.getText())){
+                            nombreTabla = "#"+jTextFieldTabla.getText();
+                        }else{
+                            nombreTabla = jTextFieldTabla.getText();
+                        }
+                        Singleton.getInstance().getConexionServidor().realizarInstruccionSql(1,"SELECT "+jTextFieldExpr.getText()+" INTO  #"+jTextFieldResult.getText()+" FROM "+nombreTabla);
+                        Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM #"+jTextFieldResult.getText());
+                        Singleton.getInstance().getConexionServidor().setRs(null);
+
+                        String consulta = "SELECT * FROM #"+jTextFieldResult.getText();
+                        Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0, consulta);
+                        Tabla nuevaTabla = new Tabla(jTextFieldResult.getText(),true,Singleton.getInstance().getConexionServidor().convertirVector2ArrayList(Singleton.getInstance().getConexionServidor().atributosCosulta()));
+                        Singleton.getInstance().getConexionServidor().agregarNombreTabla(nuevaTabla);
+
+                        //Funcion que hace la llamada para ver en la interfaz
+                        Singleton.getInstance().getAdministrador().tablaProyeccion(this);
+                        String consult = "SELECT "+jTextFieldExpr.getText()+" FROM "+nombreTabla;
+                        String algebra = "Π "+jTextFieldExpr.getText()+" ("+jTextFieldTabla.getText()+")";
+                        this.jTextAreaSql.setText(consult);
+                        this.jTextAreaAlg.setText(algebra);
+
+                        }catch(SQLException ex){
+                            JOptionPane.showMessageDialog(this, "Ocurrio algun error inesperado durante"
+                                        +" la ejecución", "Error inesperado", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Algun atributo seleccionado es incorrecto"
+                                        , "Atributo incorrecto", JOptionPane.ERROR_MESSAGE);
+                    }
                 }else{
-                    nombreTabla = jTextFieldTabla.getText();
-                }
-                Singleton.getInstance().getConexionServidor().realizarInstruccionSql(1,"SELECT "+jTextFieldExpr.getText()+" INTO  #"+jTextFieldResult.getText()+" FROM "+nombreTabla);
-                Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM #"+jTextFieldResult.getText());
-                Singleton.getInstance().getConexionServidor().setRs(null);
-                
-                String consulta = "SELECT * FROM #"+jTextFieldResult.getText();
-                Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0, consulta);
-                Tabla nuevaTabla = new Tabla(jTextFieldResult.getText(),true,Singleton.getInstance().getConexionServidor().convertirVector2ArrayList(Singleton.getInstance().getConexionServidor().atributosCosulta()));
-                Singleton.getInstance().getConexionServidor().agregarNombreTabla(nuevaTabla);
-                
-                //Funcion que hace la llamada para ver en la interfaz
-                Singleton.getInstance().getAdministrador().tablaProyeccion(this);
-                String consult = "SELECT "+jTextFieldExpr.getText()+" FROM "+nombreTabla;
-                String algebra = "Π "+jTextFieldExpr.getText()+" ("+jTextFieldTabla.getText()+")";
-                this.jTextAreaSql.setText(consult);
-                this.jTextAreaAlg.setText(algebra);
-                
-                }catch(SQLException ex){
-                    JOptionPane.showMessageDialog(this, "Ocurrio algun error inesperado durante"
-                                +" la ejecución", "Error inesperado", JOptionPane.ERROR_MESSAGE);
+                    String tabla = jTextFieldResult.getText();
+                    JOptionPane.showMessageDialog(this, "Error el nombre para el resultado de la tabla: "
+                                +tabla+" ya existe", "Existencia de la tabla resultado", JOptionPane.ERROR_MESSAGE);
                 }
             }else{
                 String tabla = jTextFieldTabla.getText();
@@ -244,23 +256,28 @@ public class VentanaProyeccion extends javax.swing.JFrame {
             }
         }else{
             if(Singleton.getInstance().getConexionServidor().existeTablaP(jTextFieldTabla.getText())){
-                try {
-                    String nombreTabla;
-                    if(Singleton.getInstance().getConexionServidor().esTablaTemporalP(jTextFieldTabla.getText())){
-                        nombreTabla = "#"+jTextFieldTabla.getText();
-                    }else{
-                        nombreTabla = jTextFieldTabla.getText();
+                if(Singleton.getInstance().getConexionServidor().validarAtributos(jTextFieldTabla.getText(),jTextFieldExpr.getText()) || "*".equals(jTextFieldExpr.getText())){
+                    try {
+                        String nombreTabla;
+                        if(Singleton.getInstance().getConexionServidor().esTablaTemporalP(jTextFieldTabla.getText())){
+                            nombreTabla = "#"+jTextFieldTabla.getText();
+                        }else{
+                            nombreTabla = jTextFieldTabla.getText();
+                        }
+                        String consult = "SELECT "+jTextFieldExpr.getText()+" FROM "+nombreTabla;
+                        String algebra = "Π "+jTextFieldExpr.getText()+" ("+jTextFieldTabla.getText()+")";
+                        Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,consult);
+                        Singleton.getInstance().getAdministrador().tablaProyeccion(this);
+                        this.jTextAreaSql.setText(consult);
+                        this.jTextAreaAlg.setText(algebra);
+
+                    } catch (SQLException ex) {
+                        JOptionPane.showMessageDialog(this, "Ocurrio algun error inesperado durante"
+                                    +" la ejecución", "Error inesperado", JOptionPane.ERROR_MESSAGE);
                     }
-                    String consult = "SELECT "+jTextFieldExpr.getText()+" FROM "+nombreTabla;
-                    String algebra = "Π "+jTextFieldExpr.getText()+" ("+jTextFieldTabla.getText()+")";
-                    Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,consult);
-                    Singleton.getInstance().getAdministrador().tablaProyeccion(this);
-                    this.jTextAreaSql.setText(consult);
-                    this.jTextAreaAlg.setText(algebra);
-                    
-                } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(this, "Ocurrio algun error inesperado durante"
-                                +" la ejecución", "Error inesperado", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(this, "Algun atributo seleccionado es incorrecto"
+                                        , "Atributo incorrecto", JOptionPane.ERROR_MESSAGE);
                 }
             }else{
                 String tabla = jTextFieldTabla.getText();

@@ -88,6 +88,11 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
         });
 
         jButtonProductoCartesiano.setText("Producto Cartesiano");
+        jButtonProductoCartesiano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonProductoCartesianoActionPerformed(evt);
+            }
+        });
 
         jButtonIntersecion.setText("Intersección");
 
@@ -238,6 +243,13 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
         ventanaProc.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonProyeccionActionPerformed
+
+    private void jButtonProductoCartesianoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProductoCartesianoActionPerformed
+        // TODO add your handling code here:
+        VentanaProductoCartesiano ventana = new VentanaProductoCartesiano(this);
+        this.setVisible(false);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jButtonProductoCartesianoActionPerformed
 
     /**
      * @param args the command line arguments
