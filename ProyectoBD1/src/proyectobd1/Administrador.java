@@ -5,6 +5,7 @@
  */
 package proyectobd1;
 
+import frames.VentanaProductoCartesiano;
 import frames.VentanaProyeccion;
 import frames.VentanaSeleccion;
 import frames.VentanaUnion;
@@ -71,5 +72,14 @@ public class Administrador {
         DefaultTableModel modelo = new DefaultTableModel(datos,atributos);
         
         ventana.jTableProyec.setModel(modelo);
+    }
+    
+    public void tablaProductoCartesiano(VentanaProductoCartesiano ventana) throws SQLException{
+        String[] atributos = Singleton.getInstance().getConexionServidor().atributosCosulta();
+        String[][] datos = Singleton.getInstance().getConexionServidor().tuplasConsulta();
+        
+        DefaultTableModel modelo = new DefaultTableModel(datos,atributos);
+        
+        ventana.jTableResul.setModel(modelo);
     }
 }

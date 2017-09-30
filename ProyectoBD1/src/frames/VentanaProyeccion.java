@@ -212,7 +212,7 @@ public class VentanaProyeccion extends javax.swing.JFrame {
             if(Singleton.getInstance().getConexionServidor().existeTablaP(jTextFieldTabla.getText())){
                 if((Singleton.getInstance().getConexionServidor().existeTablaP(jTextFieldResult.getText()) != true) && 
                         (Singleton.getInstance().getConexionServidor().esTablaTemporalP(jTextFieldResult.getText()) != true)){
-                    if(Singleton.getInstance().getConexionServidor().validarAtributos(jTextFieldTabla.getText(),jTextFieldExpr.getText()) || jTextFieldExpr.getText()=="*"){    
+                    if(Singleton.getInstance().getConexionServidor().validarAtributos(jTextFieldTabla.getText(),jTextFieldExpr.getText()) || "*".equals(jTextFieldExpr.getText())){    
                         try{
                         String nombreTabla;
                         if(Singleton.getInstance().getConexionServidor().esTablaTemporalP(jTextFieldTabla.getText())){
