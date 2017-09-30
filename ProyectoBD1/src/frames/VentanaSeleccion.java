@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import proyectobd1.Singleton;
 import proyectobd1.Tabla;
 
@@ -48,9 +49,9 @@ public class VentanaSeleccion extends javax.swing.JFrame {
         jTableSelecc = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txAResultadoAlgebraR = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        txAResultSQL = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -99,13 +100,13 @@ public class VentanaSeleccion extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txAResultadoAlgebraR.setColumns(20);
+        txAResultadoAlgebraR.setRows(5);
+        jScrollPane1.setViewportView(txAResultadoAlgebraR);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane3.setViewportView(jTextArea2);
+        txAResultSQL.setColumns(20);
+        txAResultSQL.setRows(5);
+        jScrollPane3.setViewportView(txAResultSQL);
 
         jLabel4.setText("Equivalente Álgebra Relacional");
 
@@ -178,8 +179,7 @@ public class VentanaSeleccion extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(txfTablaResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txfTablaResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
@@ -210,23 +210,34 @@ public class VentanaSeleccion extends javax.swing.JFrame {
                     }else{
                         nombreTabla = txfNombreTabla.getText();
                     }
-                    Singleton.getInstance().getConexionServidor().realizarInstruccionSql(1,"SELECT * INTO  #"+txfTablaResultado.getText()+" FROM "+nombreTabla+" where "+txfPredicado.getText());
-                    Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM #"+txfTablaResultado.getText());
-                    Singleton.getInstance().getConexionServidor().setRs(null);
-                    
-                    String consulta = "SELECT * FROM #"+txfTablaResultado.getText();
-                    Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0, consulta);
-                    Tabla nuevaTabla = new Tabla(txfTablaResultado.getText(),true,Singleton.getInstance().getConexionServidor().convertirVector2ArrayList(Singleton.getInstance().getConexionServidor().atributosCosulta()));
-                    Singleton.getInstance().getConexionServidor().agregarNombreTabla(nuevaTabla);
-                    
-                    //Funcion que hace la llamada para ver en la interfaz
-                    Singleton.getInstance().getAdministrador().tablaSeleccion(this);
-                    
+                    if(!Singleton.getInstance().getConexionServidor().existeTablaP(txfTablaResultado.getText())){
+                        
+                        Singleton.getInstance().getConexionServidor().realizarInstruccionSql(1,"SELECT * INTO  #"+txfTablaResultado.getText()+" FROM "+nombreTabla+" where "+txfPredicado.getText());
+                        Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM #"+txfTablaResultado.getText());
+                        Singleton.getInstance().getConexionServidor().setRs(null);
+
+                        String consulta = "SELECT * FROM #"+txfTablaResultado.getText();
+                        Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0, consulta);
+                        Tabla nuevaTabla = new Tabla(txfTablaResultado.getText(),true,Singleton.getInstance().getConexionServidor().convertirVector2ArrayList(Singleton.getInstance().getConexionServidor().atributosCosulta()));
+                        Singleton.getInstance().getConexionServidor().agregarNombreTabla(nuevaTabla);
+
+                        //Funcion que hace la llamada para ver en la interfaz
+                        Singleton.getInstance().getAdministrador().tablaSeleccion(this);
+                        
+                        String consultaSql = "SELECT * FROM "+txfNombreTabla.getText()+" WHERE "+txfPredicado.getText()+"\n\nNombre de la tabla resultado: "+txfTablaResultado.getText();
+                        String consultaAlgebra = txfTablaResultado.getText()+"<- σ "+txfPredicado.getText()+" ("+txfNombreTabla.getText()+")";
+                        
+                        txAResultSQL.setText(consultaSql);
+                        txAResultadoAlgebraR.setText(consultaAlgebra);
+                    }else{
+                        JOptionPane.showMessageDialog(this, "La tabla resultado ya existe, introduzca un diferente nombre", "Error tabla ya existe", JOptionPane.ERROR_MESSAGE);
+                    }
+      
                 } catch (SQLException ex) {
-                    Logger.getLogger(VentanaSeleccion.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "El predicado o el tipo de datos de la tablas, no coinciden, porfavor revise los valores", "Error inesperado", JOptionPane.ERROR_MESSAGE);
                 }
             }else{
-                System.out.println("Error tabla no existe");
+                JOptionPane.showMessageDialog(this, "La tabla introducida no existe o escribió mal el nombre", "Error tabla no existe", JOptionPane.ERROR_MESSAGE);
             }
             
         }else{
@@ -238,13 +249,21 @@ public class VentanaSeleccion extends javax.swing.JFrame {
                     }else{
                         nombreTabla = txfNombreTabla.getText();
                     }
+                    
                     Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM "+nombreTabla+" WHERE "+txfPredicado.getText());
                     Singleton.getInstance().getAdministrador().tablaSeleccion(this);
+                    
+                    String consultaSql = "SELECT * FROM "+txfNombreTabla.getText()+" WHERE "+txfPredicado.getText();
+                    String consultaAlgebra = "σ "+txfPredicado.getText()+" ("+txfNombreTabla.getText()+")";
+                        
+                    txAResultSQL.setText(consultaSql);
+                    txAResultadoAlgebraR.setText(consultaAlgebra);
+                    
                 } catch (SQLException ex) {
-                    Logger.getLogger(VentanaSeleccion.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "El predicado o el tipo de datos de la tablas, no coinciden, porfavor revise los valores", "Error inesperado", JOptionPane.ERROR_MESSAGE);
                 }
             }else{
-                System.out.println("Error tabla no existe");
+                JOptionPane.showMessageDialog(this, "La tabla introducida no existe o escribió mal el nombre", "Error tabla no existe", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_ejecutarBtnActionPerformed
@@ -273,8 +292,8 @@ public class VentanaSeleccion extends javax.swing.JFrame {
     public javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     public javax.swing.JTable jTableSelecc;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea txAResultSQL;
+    private javax.swing.JTextArea txAResultadoAlgebraR;
     private javax.swing.JTextField txfNombreTabla;
     private javax.swing.JTextField txfPredicado;
     private javax.swing.JTextField txfTablaResultado;

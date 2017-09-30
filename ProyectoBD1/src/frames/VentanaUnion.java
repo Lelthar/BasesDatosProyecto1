@@ -8,6 +8,7 @@ package frames;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import proyectobd1.Singleton;
 import proyectobd1.Tabla;
 
@@ -47,9 +48,9 @@ public class VentanaUnion extends javax.swing.JFrame {
         jTableResultado = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txAResultSQL = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        txAResultAlgebraR = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -94,13 +95,13 @@ public class VentanaUnion extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txAResultSQL.setColumns(20);
+        txAResultSQL.setRows(5);
+        jScrollPane1.setViewportView(txAResultSQL);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane3.setViewportView(jTextArea2);
+        txAResultAlgebraR.setColumns(20);
+        txAResultAlgebraR.setRows(5);
+        jScrollPane3.setViewportView(txAResultAlgebraR);
 
         jLabel4.setText("Equivalente en Álgebra Relacional");
 
@@ -211,8 +212,8 @@ public class VentanaUnion extends javax.swing.JFrame {
                     }else{
                         nombreTabla2 = txfNombreTabla2.getText();
                     }
-                    
-                   try {
+                    if(!Singleton.getInstance().getConexionServidor().existeTablaP(txfTablaResultado.getText())){
+                        try {
                         Singleton.getInstance().getConexionServidor().realizarInstruccionSql(1,"SELECT * INTO  #"+txfTablaResultado.getText()+" FROM "+nombreTabla1+" UNION SELECT * FROM "+nombreTabla2);
                         Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM #"+txfTablaResultado.getText());
                         Singleton.getInstance().getConexionServidor().setRs(null);
@@ -223,15 +224,28 @@ public class VentanaUnion extends javax.swing.JFrame {
                         //Funcion que hace la llamada para ver en la interfaz
                         //Singleton.getInstance().getAdministrador().tablaSeleccion(this);
                         Singleton.getInstance().getAdministrador().tablaUnion(this);
-                   } catch (SQLException ex) {
-                       Logger.getLogger(VentanaUnion.class.getName()).log(Level.SEVERE, null, ex);
-                    }    
+                        
+                        String consultaSql = "SELECT * FROM "+txfNombreTabla1.getText()+"\nUNION\n"+"SELECT * FROM "+txfNombreTabla2.getText()+"\n\nNombre de la tabla resultado: "+txfTablaResultado.getText();
+                        String consultaAlgebra = txfTablaResultado.getText()+"<- "+txfNombreTabla1.getText()+" U "+txfNombreTabla2.getText();
+                        
+                        txAResultSQL.setText(consultaSql);
+                        txAResultAlgebraR.setText(consultaAlgebra);
+                        
+                        } catch (SQLException ex) {
+                            //Logger.getLogger(VentanaUnion.class.getName()).log(Level.SEVERE, null, ex);
+                            JOptionPane.showMessageDialog(this, "El predicado o el tipo de datos de la tablas, no coinciden, porfavor revise los valores", "Error inesperado", JOptionPane.ERROR_MESSAGE);
+                         }  
+                    
+                    }else{
+                        JOptionPane.showMessageDialog(this, "La tabla resultado ya existe, introduzca un diferente nombre", "Error tabla ya existe", JOptionPane.ERROR_MESSAGE);
+                    }
+                     
                     
                }else{
-                   System.out.println("Las tablas no tienen la misma aridad");
+                   JOptionPane.showMessageDialog(this, "Las tablas no tienen la misma aridad, introduzca unas tablas que tengan la misma aridad en sus atributos", "Error tablas con diferente aridad", JOptionPane.ERROR_MESSAGE);
                }
            }else{
-               System.out.println("Una de las tablas no existe");
+               JOptionPane.showMessageDialog(this, "Una de las dos tablas no existe", "Error tabla no existe", JOptionPane.ERROR_MESSAGE);
            }  
        }else{
            if(Singleton.getInstance().getConexionServidor().existeTablaP(txfNombreTabla1.getText()) && Singleton.getInstance().getConexionServidor().existeTablaP(txfNombreTabla2.getText())){
@@ -248,21 +262,27 @@ public class VentanaUnion extends javax.swing.JFrame {
                     }else{
                         nombreTabla2 = txfNombreTabla2.getText();
                     }
-                    
-                   try {
+                   
+                    try {
                         Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM "+nombreTabla1+" UNION SELECT * FROM "+nombreTabla2);
                         //Funcion que hace la llamada para ver en la interfaz
                         //Singleton.getInstance().getAdministrador().tablaSeleccion(this);
                         Singleton.getInstance().getAdministrador().tablaUnion(this);
-                   } catch (SQLException ex) {
-                       Logger.getLogger(VentanaUnion.class.getName()).log(Level.SEVERE, null, ex);
-                    }    
-                    
+                        
+                        String consultaSql = "SELECT * FROM "+txfNombreTabla1.getText()+"\nUNION\n"+"SELECT * FROM "+txfNombreTabla2.getText();
+                        String consultaAlgebra = txfNombreTabla1.getText()+" U "+txfNombreTabla2.getText();
+                        
+                        txAResultSQL.setText(consultaSql);
+                        txAResultAlgebraR.setText(consultaAlgebra);
+                    } catch (SQLException ex) {
+                          Logger.getLogger(VentanaUnion.class.getName()).log(Level.SEVERE, null, ex);
+                    }  
+
                }else{
-                   System.out.println("Las tablas no tienen la misma aridad");
+                   JOptionPane.showMessageDialog(this, "Las tablas no tienen la misma aridad, introduzca unas tablas que tengan la misma aridad en sus atributos", "Error tablas con diferente aridad", JOptionPane.ERROR_MESSAGE);
                }
            }else{
-               System.out.println("Una de las tablas no existe");
+               JOptionPane.showMessageDialog(this, "Una de las dos tablas no existe", "Error tabla no existe", JOptionPane.ERROR_MESSAGE);
            }
        }
     }//GEN-LAST:event_ejecutarBtnActionPerformed
@@ -293,8 +313,8 @@ public class VentanaUnion extends javax.swing.JFrame {
     public javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     public javax.swing.JTable jTableResultado;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea txAResultAlgebraR;
+    private javax.swing.JTextArea txAResultSQL;
     private javax.swing.JTextField txfNombreTabla1;
     private javax.swing.JTextField txfNombreTabla2;
     private javax.swing.JTextField txfTablaResultado;
