@@ -233,7 +233,7 @@ public class VentanaUnion extends javax.swing.JFrame {
                         
                         } catch (SQLException ex) {
                             //Logger.getLogger(VentanaUnion.class.getName()).log(Level.SEVERE, null, ex);
-                            JOptionPane.showMessageDialog(this, "El predicado o el tipo de datos de la tablas, no coinciden, porfavor revise los valores", "Error inesperado", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(this, "El dominio o el tipo de datos de la tablas no coinciden, porfavor revise los valores", "Error inesperado", JOptionPane.ERROR_MESSAGE);
                          }  
                     
                     }else{
