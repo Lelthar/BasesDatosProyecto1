@@ -274,8 +274,9 @@ public class VentanaUnion extends javax.swing.JFrame {
                         
                         txAResultSQL.setText(consultaSql);
                         txAResultAlgebraR.setText(consultaAlgebra);
+                        
                     } catch (SQLException ex) {
-                          Logger.getLogger(VentanaUnion.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(this, "El dominio o el tipo de datos de la tablas no coinciden, porfavor revise los valores", "Error inesperado", JOptionPane.ERROR_MESSAGE);
                     }  
 
                }else{

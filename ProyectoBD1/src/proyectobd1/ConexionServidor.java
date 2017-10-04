@@ -106,7 +106,7 @@ public class ConexionServidor {
     
     public void agregarListaTablas() throws SQLException{
         if(con != null){
-             ResultSet result = null;
+            ResultSet result = null;
             String[] types = {"TABLE"};
             result = metaDatos.getTables(null, "dbo", "%", types);
             while (result.next()) {
