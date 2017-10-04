@@ -98,7 +98,4 @@ public class Administrador {
         
         ventana.jTableResultado.setModel(modelo);
     }
-    
-    
-    
 }
