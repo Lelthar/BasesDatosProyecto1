@@ -98,17 +98,5 @@ public class Administrador {
         
         ventana.jTableResultado.setModel(modelo);
     }
-    /**
-     *Metodo que permite cargas los datos en la tabla de la ventana Intersección. 
-     * @param ventana
-     * @throws SQLException 
-     */
-    public void tablaInterseccion(VentanaInterseccion ventana) throws SQLException{
-        String[] atributos = Singleton.getInstance().getConexionServidor().atributosCosulta();
-        String[][] datos = Singleton.getInstance().getConexionServidor().tuplasConsulta();
-        
-        DefaultTableModel modelo = new DefaultTableModel(datos,atributos);
-        
-        ventana.jTableResul.setModel(modelo);
-    }
+    
 }
