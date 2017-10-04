@@ -226,7 +226,7 @@ public class VentanaInterseccion extends javax.swing.JFrame {
                                     Tabla nuevaTabla = new Tabla(jTextFieldResul.getText(),true,Singleton.getInstance().getConexionServidor().convertirVector2ArrayList(Singleton.getInstance().getConexionServidor().atributosCosulta()));
                                     Singleton.getInstance().getConexionServidor().agregarNombreTabla(nuevaTabla);
 
-                                    //Singleton.getInstance().getAdministrador().tablaInterseccion(this);
+                                    Singleton.getInstance().getAdministrador().tablaInterseccion(this);
                                     String int1="SELECT * FROM " + jTextFieldTabla1.getText();
                                     String int2="SELECT * FROM " + jTextFieldTabla1.getText();
                                     String consult = int1 +"\n INTERSECT \n"+int2;
@@ -283,7 +283,7 @@ public class VentanaInterseccion extends javax.swing.JFrame {
                                 String consult = "SELECT * FROM "+nombreTabla1+" intersect SELECT * FROM "+ nombreTabla2;
                                 String algebra = "( "+int1+" ∩ "+int2+" )";
                                 Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,consult);
-                                //Singleton.getInstance().getAdministrador().tablaInterseccion(this);
+                                Singleton.getInstance().getAdministrador().tablaInterseccion(this);
                                 this.jTextAreaSql.setText(consultA);
                                 this.jTextAreaAlg.setText(algebra);
 
