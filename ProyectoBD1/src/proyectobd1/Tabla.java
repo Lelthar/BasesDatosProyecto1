@@ -13,13 +13,17 @@ import java.util.ArrayList;
  */
 public class Tabla {
     private String nombre;
+    private String nombreOriginal;
     private Boolean temporal;
     private ArrayList<String> listaAtributos;
+    private ArrayList<String> listaAtributosOriginal;
     
     public Tabla(){
-        this.nombre=null;
-        this.temporal=null;
+        this.nombre = null;
+        this.nombreOriginal = null;
+        this.temporal = null;
         this.listaAtributos = new ArrayList();
+        this.listaAtributosOriginal = new ArrayList();
     }
     
     public Tabla(String nombre) {
@@ -28,8 +32,10 @@ public class Tabla {
     
     public Tabla(String nombre, Boolean temporal, ArrayList<String> listaAtributos) {
         this.nombre = nombre;
+        this.nombreOriginal = nombre;
         this.temporal = temporal;
         this.listaAtributos = listaAtributos;
+        this.listaAtributosOriginal = listaAtributos;
     }
 
     public ArrayList<String> getListaAtributos() {
