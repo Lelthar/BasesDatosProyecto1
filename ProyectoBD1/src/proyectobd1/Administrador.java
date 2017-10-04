@@ -9,6 +9,7 @@ import frames.VentanaProductoCartesiano;
 import frames.VentanaProyeccion;
 import frames.VentanaSeleccion;
 import frames.VentanaUnion;
+import frames.VentanaInterseccion;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -75,6 +76,15 @@ public class Administrador {
     }
     
     public void tablaProductoCartesiano(VentanaProductoCartesiano ventana) throws SQLException{
+        String[] atributos = Singleton.getInstance().getConexionServidor().atributosCosulta();
+        String[][] datos = Singleton.getInstance().getConexionServidor().tuplasConsulta();
+        
+        DefaultTableModel modelo = new DefaultTableModel(datos,atributos);
+        
+        ventana.jTableResul.setModel(modelo);
+    }
+    
+    public void tablaInterseccion(VentanaInterseccion ventana) throws SQLException{
         String[] atributos = Singleton.getInstance().getConexionServidor().atributosCosulta();
         String[][] datos = Singleton.getInstance().getConexionServidor().tuplasConsulta();
         

@@ -95,6 +95,11 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
         });
 
         jButtonIntersecion.setText("Intersección");
+        jButtonIntersecion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIntersecionActionPerformed(evt);
+            }
+        });
 
         jButtonDivision.setText("División");
 
@@ -250,6 +255,13 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
         this.setVisible(false);
         ventana.setVisible(true);
     }//GEN-LAST:event_jButtonProductoCartesianoActionPerformed
+
+    private void jButtonIntersecionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIntersecionActionPerformed
+        // TODO add your handling code here:
+        VentanaInterseccion ventana = new VentanaInterseccion(this);
+        this.setVisible(false);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jButtonIntersecionActionPerformed
 
     /**
      * @param args the command line arguments
