@@ -239,8 +239,9 @@ public class VentanaInterseccion extends javax.swing.JFrame {
                                             +" la ejecución", "Error inesperado", JOptionPane.ERROR_MESSAGE);
                                 }
                             }else{
-                                JOptionPane.showMessageDialog(this, "Las tablas no tiene la misma aridad"
-                                            , "Diferente Aridad", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(this, "Las tablas no tiene la misma aridad, la tabla "
+                                            +jTextFieldTabla1.getText()+" tiene aridad: "+t1
+                                            +" y la tabla: "+jTextFieldTabla2.getText()+" tiene  aridad: "+t2, "Diferente Aridad", JOptionPane.ERROR_MESSAGE);
                             }
                         }else{
                             String tabla = jTextFieldResul.getText();
@@ -291,8 +292,9 @@ public class VentanaInterseccion extends javax.swing.JFrame {
                                         +" la ejecución", "Error inesperado", JOptionPane.ERROR_MESSAGE);
                             }
                         }else{
-                            JOptionPane.showMessageDialog(this, "Las tablas no tiene la misma aridad"
-                                            , "Diferente Aridad", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(this, "Las tablas no tiene la misma aridad, la tabla "
+                                            +jTextFieldTabla1.getText()+" tiene aridad: "+t1
+                                            +" y la tabla: "+jTextFieldTabla2.getText()+" tiene  aridad: "+t2, "Diferente Aridad", JOptionPane.ERROR_MESSAGE);
                         }
                     }else{
                         String tabla = jTextFieldTabla2.getText();
