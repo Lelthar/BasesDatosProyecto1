@@ -10,6 +10,7 @@ import frames.VentanaProductoCartesiano;
 import frames.VentanaProyeccion;
 import frames.VentanaSeleccion;
 import frames.VentanaUnion;
+import frames.VentanaInterseccion;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
