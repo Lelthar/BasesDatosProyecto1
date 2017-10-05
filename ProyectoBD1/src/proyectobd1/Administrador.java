@@ -99,7 +99,19 @@ public class Administrador {
         
         ventana.jTableResultado.setModel(modelo);
     }
-    
+    /**
+     * Metodo que permite cargas los datos en la tabla de la ventana Renombrar.
+     * @param ventana
+     * @throws SQLException 
+     */
+    public  void tablaRenombrarAtributos(VentanaRenombrarAtributos ventana) throws SQLException{
+        String[] atributos = Singleton.getInstance().getConexionServidor().atributosCosulta();
+        String[][] datos = Singleton.getInstance().getConexionServidor().tuplasConsulta();
+        
+        DefaultTableModel modelo = new DefaultTableModel(datos,atributos);
+        
+        ventana.jTableResultado.setModel(modelo);
+    }
     /**
      * Metodo que permite cargas los datos en la tabla de la ventana Insercción.
      * @param ventana
@@ -114,18 +126,5 @@ public class Administrador {
         ventana.jTableResul.setModel(modelo);
     }
     
-    /**
-     * Metodo que permite cargas los datos en la tabla de la ventana Renombrar.
-     * @param ventana
-     * @throws SQLException 
-     */
-    public  void tablaRenombrarAtributos(VentanaRenombrarAtributos ventana) throws SQLException{
-        String[] atributos = Singleton.getInstance().getConexionServidor().atributosCosulta();
-        String[][] datos = Singleton.getInstance().getConexionServidor().tuplasConsulta();
-        
-        DefaultTableModel modelo = new DefaultTableModel(datos,atributos);
-        
-        ventana.jTableResultado.setModel(modelo);
-    }
     
 }
