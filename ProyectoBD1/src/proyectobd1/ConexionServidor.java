@@ -284,7 +284,8 @@ public class ConexionServidor {
         }
         return true;
     }
-     /*
+    
+    /*
     * Esta funcion sirve para renombrar el nombre de una tabla y sus attributos
     */
     public void renombrarTabla(String nombreTabla, String nombreNuevoTabla, ArrayList<String> listaAtributos){
@@ -347,5 +348,5 @@ public class ConexionServidor {
             }
         }
         return resultado;
-    }
+    } 
 }
