@@ -74,7 +74,6 @@ public class ConexionServidor {
             this.stmt = this.con.createStatement();
             this.metaDatos = con.getMetaData();
             agregarListaTablas();
-            System.out.println(existeTablaP("clientes"));
             System.out.println("Conexion establecida...");
         }  
 
@@ -263,4 +262,69 @@ public class ConexionServidor {
         }
         return true;
     }
+    
+   /*
+    * Esta funcion sirve para renombrar el nombre de una tabla y sus attributos
+    */
+    public void renombrarTabla(String nombreTabla, String nombreNuevoTabla, ArrayList<String> listaAtributos){
+        for(int i = 0; i < this.listaTablas.size(); i++){
+            if(this.listaTablas.get(i).getNombre().equals(nombreTabla)){
+                this.listaTablas.get(i).setNombre(nombreNuevoTabla);
+                this.listaTablas.get(i).setListaAtributos(listaAtributos);
+                this.listaTablas.get(i).setTemporal(true);
+            }
+        }
+    
+    } 
+    
+    /*
+    * Esta funcion sirve para obtener la cantidad de elementos de un arraylist
+    */
+    public int cantidadAtributos(String nombreTabla){
+        for(int i = 0; i < this.listaTablas.size(); i++){
+            if(this.listaTablas.get(i).getNombre().equals(nombreTabla)){
+                return this.listaTablas.get(i).getListaAtributos().size();
+            }
+        }
+        return 0;
+    }
+    
+    /*
+    * Esta funcion sirve para obtener la lista de atributos de un string
+    */
+    public ArrayList<String> listaAtributosString(String listaAtributos){
+        ArrayList<String> resultado = new ArrayList<>();
+        String atributo = "";
+        
+        for(int i = 0; i < listaAtributos.length(); i++){
+            if(i == (listaAtributos.length()-1)){
+                atributo+=listaAtributos.charAt(i);
+                resultado.add(atributo);
+            }else if(listaAtributos.charAt(i) == ','){
+                resultado.add(atributo);
+                atributo = "";
+            }else if(listaAtributos.charAt(i) == ' '){
+                
+            }else{
+                atributo += listaAtributos.charAt(i);
+            }
+        }
+        return resultado;
+    } 
+    
+    /*
+    * Sirve para obtener el select de una consulta
+    */
+    public String obtenerSelectConsulta(ArrayList<String> listaAtributosTabla, ArrayList<String> listaAtributosTablaNueva){
+        String resultado = "";
+        
+        for(int i = 0; i < listaAtributosTabla.size(); i++){
+            if(i == listaAtributosTabla.size()-1){
+                resultado += (listaAtributosTabla.get(i)+" as "+listaAtributosTablaNueva.get(i));
+            }else{
+                resultado += (listaAtributosTabla.get(i)+" as "+listaAtributosTablaNueva.get(i)+",");
+            }
+        }
+        return resultado;
+    } 
 }
