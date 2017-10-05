@@ -12,6 +12,7 @@ import frames.VentanaProyeccion;
 import frames.VentanaSeleccion;
 import frames.VentanaUnion;
 import frames.VentanaInterseccion;
+import frames.VentanaNaturalJoin;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -114,7 +115,26 @@ public class Administrador {
         ventana.jTableResul.setModel(modelo);
     }
     
+    /**
+     * Metodo que permite cargas los datos en la tabla de la ventana División.
+     * @param ventana
+     * @throws SQLException 
+     */
     public void tablaDivision(VentanaDivision ventana) throws SQLException{
+        String[] atributos = Singleton.getInstance().getConexionServidor().atributosCosulta();
+        String[][] datos = Singleton.getInstance().getConexionServidor().tuplasConsulta();
+        
+        DefaultTableModel modelo = new DefaultTableModel(datos,atributos);
+        
+        ventana.jTableResul.setModel(modelo);
+    }
+    
+    /**
+     * Metodo que permite cargas los datos en la tabla de la ventana División.
+     * @param ventana
+     * @throws SQLException 
+     */
+    public void tablaNaturalJoin(VentanaNaturalJoin ventana) throws SQLException{
         String[] atributos = Singleton.getInstance().getConexionServidor().atributosCosulta();
         String[][] datos = Singleton.getInstance().getConexionServidor().tuplasConsulta();
         
