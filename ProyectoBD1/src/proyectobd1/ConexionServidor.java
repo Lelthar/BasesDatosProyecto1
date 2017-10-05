@@ -348,5 +348,40 @@ public class ConexionServidor {
             }
         }
         return resultado;
-    } 
+    }
+    
+    /**
+     * Función que obtiene los atributos comunes estre dos tablas
+     * @param nombreTabla1
+     * @param nombreTabla2
+     * @return 
+    */
+    public ArrayList<String> atributosComunes(String nombreTabla1,String nombreTabla2){
+        ArrayList<String> listaA = obtenerAtributos(nombreTabla1);
+        ArrayList<String> listaO = obtenerAtributos(nombreTabla2);
+        ArrayList<String> result = new ArrayList<>();
+        for(int i=0;i<listaO.size();i++){
+            if(listaA.contains(listaO.get(i))){
+                result.add(listaO.get(i));
+            }
+        }
+        return result;
+    }
+    /**
+     * Función que elimina los elementos comunes entre dos tablas
+     * @param nombreTabla
+     * @param comunes
+     * @return 
+     */
+    public ArrayList<String> atributosCorrectos(String nombreTabla,ArrayList<String> comunes){
+        ArrayList<String> listaA = obtenerAtributos(nombreTabla);
+        for(int i=0;i<comunes.size();i++){
+            if(listaA.contains(comunes.get(i))){
+                listaA.remove(comunes.get(i));
+            }
+        }
+        
+        return listaA;
+    }
+    
 }
