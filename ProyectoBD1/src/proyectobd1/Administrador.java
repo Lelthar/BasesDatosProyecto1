@@ -115,6 +115,11 @@ public class Administrador {
         ventana.jTableResul.setModel(modelo);
     }
     
+    /**
+     * Metodo que permite cargas los datos en la tabla de la ventana División.
+     * @param ventana
+     * @throws SQLException 
+     */
     public void tablaDivision(VentanaDivision ventana) throws SQLException{
         String[] atributos = Singleton.getInstance().getConexionServidor().atributosCosulta();
         String[][] datos = Singleton.getInstance().getConexionServidor().tuplasConsulta();

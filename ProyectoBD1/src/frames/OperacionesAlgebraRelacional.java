@@ -123,6 +123,11 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
         });
 
         jButtonConcaNatural.setText("Concatenación Natural");
+        jButtonConcaNatural.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConcaNaturalActionPerformed(evt);
+            }
+        });
 
         jButtonAgregación.setText("Agregación");
         jButtonAgregación.addActionListener(new java.awt.event.ActionListener() {
@@ -274,6 +279,13 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
         this.setVisible(false);
         ventana.setVisible(true);
     }//GEN-LAST:event_jButtonDivisionActionPerformed
+
+    private void jButtonConcaNaturalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConcaNaturalActionPerformed
+        // TODO add your handling code here:
+        VentanaNaturalJoin ventana = new VentanaNaturalJoin(this);
+        this.setVisible(false);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jButtonConcaNaturalActionPerformed
 
     /**
      * @param args the command line arguments
