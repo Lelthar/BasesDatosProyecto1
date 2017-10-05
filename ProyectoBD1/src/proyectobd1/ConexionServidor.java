@@ -284,37 +284,68 @@ public class ConexionServidor {
         }
         return true;
     }
-    /**
-     * Función que obtiene los atributos comunes estre dos tablas
-     * @param nombreTabla1
-     * @param nombreTabla2
-     * @return 
-     */
-    public ArrayList<String> atributosComunes(String nombreTabla1,String nombreTabla2){
-        ArrayList<String> listaA = obtenerAtributos(nombreTabla1);
-        ArrayList<String> listaO = obtenerAtributos(nombreTabla2);
-        ArrayList<String> result = new ArrayList<>();
-        for(int i=0;i<listaO.size();i++){
-            if(listaA.contains(listaO.get(i))){
-                result.add(listaO.get(i));
+     /*
+    * Esta funcion sirve para renombrar el nombre de una tabla y sus attributos
+    */
+    public void renombrarTabla(String nombreTabla, String nombreNuevoTabla, ArrayList<String> listaAtributos){
+        for(int i = 0; i < this.listaTablas.size(); i++){
+            if(this.listaTablas.get(i).getNombre().equals(nombreTabla)){
+                this.listaTablas.get(i).setNombre(nombreNuevoTabla);
+                this.listaTablas.get(i).setListaAtributos(listaAtributos);
+                this.listaTablas.get(i).setTemporal(true);
             }
         }
-        return result;
+    
+    } 
+    
+    /*
+    * Esta funcion sirve para obtener la cantidad de elementos de un arraylist
+    */
+    public int cantidadAtributos(String nombreTabla){
+        for(int i = 0; i < this.listaTablas.size(); i++){
+            if(this.listaTablas.get(i).getNombre().equals(nombreTabla)){
+                return this.listaTablas.get(i).getListaAtributos().size();
+            }
+        }
+        return 0;
     }
-    /**
-     * Función que elimina los elementos comunes entre dos tablas
-     * @param nombreTabla
-     * @param comunes
-     * @return 
-     */
-    public ArrayList<String> atributosCorrectos(String nombreTabla,ArrayList<String> comunes){
-        ArrayList<String> listaA = obtenerAtributos(nombreTabla);
-        for(int i=0;i<comunes.size();i++){
-            if(listaA.contains(comunes.get(i))){
-                listaA.remove(comunes.get(i));
+    
+    /*
+    * Esta funcion sirve para obtener la lista de atributos de un string
+    */
+    public ArrayList<String> listaAtributosString(String listaAtributos){
+        ArrayList<String> resultado = new ArrayList<>();
+        String atributo = "";
+        
+        for(int i = 0; i < listaAtributos.length(); i++){
+            if(i == (listaAtributos.length()-1)){
+                atributo+=listaAtributos.charAt(i);
+                resultado.add(atributo);
+            }else if(listaAtributos.charAt(i) == ','){
+                resultado.add(atributo);
+                atributo = "";
+            }else if(listaAtributos.charAt(i) == ' '){
+                
+            }else{
+                atributo += listaAtributos.charAt(i);
             }
         }
+        return resultado;
+    } 
+    
+    /*
+    * Sirve para obtener el select de una consulta
+    */
+    public String obtenerSelectConsulta(ArrayList<String> listaAtributosTabla, ArrayList<String> listaAtributosTablaNueva){
+        String resultado = "";
         
-        return listaA;
+        for(int i = 0; i < listaAtributosTabla.size(); i++){
+            if(i == listaAtributosTabla.size()-1){
+                resultado += (listaAtributosTabla.get(i)+" as "+listaAtributosTablaNueva.get(i));
+            }else{
+                resultado += (listaAtributosTabla.get(i)+" as "+listaAtributosTablaNueva.get(i)+",");
+            }
+        }
+        return resultado;
     }
 }
