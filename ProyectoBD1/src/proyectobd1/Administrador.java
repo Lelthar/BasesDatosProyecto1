@@ -6,6 +6,7 @@
 package proyectobd1;
 
 import frames.VentanaDiferenciaConjuntos;
+import frames.VentanaDivision;
 import frames.VentanaProductoCartesiano;
 import frames.VentanaProyeccion;
 import frames.VentanaSeleccion;
@@ -105,6 +106,15 @@ public class Administrador {
      * @throws SQLException 
      */
     public void tablaInterseccion(VentanaInterseccion ventana) throws SQLException{
+        String[] atributos = Singleton.getInstance().getConexionServidor().atributosCosulta();
+        String[][] datos = Singleton.getInstance().getConexionServidor().tuplasConsulta();
+        
+        DefaultTableModel modelo = new DefaultTableModel(datos,atributos);
+        
+        ventana.jTableResul.setModel(modelo);
+    }
+    
+    public void tablaDivision(VentanaDivision ventana) throws SQLException{
         String[] atributos = Singleton.getInstance().getConexionServidor().atributosCosulta();
         String[][] datos = Singleton.getInstance().getConexionServidor().tuplasConsulta();
         

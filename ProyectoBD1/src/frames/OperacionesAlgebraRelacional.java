@@ -102,6 +102,11 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
         });
 
         jButtonDivision.setText("División");
+        jButtonDivision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDivisionActionPerformed(evt);
+            }
+        });
 
         jButtonRenombrar.setText("Renombrar");
         jButtonRenombrar.addActionListener(new java.awt.event.ActionListener() {
@@ -262,6 +267,13 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
         this.setVisible(false);
         ventana.setVisible(true);
     }//GEN-LAST:event_jButtonIntersecionActionPerformed
+
+    private void jButtonDivisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDivisionActionPerformed
+        // TODO add your handling code here:
+        VentanaDivision ventana = new VentanaDivision(this);
+        this.setVisible(false);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jButtonDivisionActionPerformed
 
     /**
      * @param args the command line arguments
