@@ -252,10 +252,31 @@ public class ConexionServidor {
         result.add(cadena);
         return result;
     }
-    
+    /**
+     * Función que revisa si los atributos como un string existen en una tabla
+     * @param nombreTabla
+     * @param atributos
+     * @return 
+     */
     public boolean validarAtributos(String nombreTabla,String atributos){
         ArrayList<String> listaA = obtenerAtributos(nombreTabla);
         ArrayList<String> listaO = convertirStringVector(atributos);
+        for(int i=0;i<listaO.size();i++){
+            if(!listaA.contains(listaO.get(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+    /**
+     * Función que revisa si los atributos como un vector existen en una tabla
+     * @param nombreTabla1
+     * @param nombreTabla2
+     * @return 
+     */
+    public boolean validarAtributosVec(String nombreTabla1,String nombreTabla2){
+        ArrayList<String> listaA = obtenerAtributos(nombreTabla1);
+        ArrayList<String> listaO = obtenerAtributos(nombreTabla2);
         for(int i=0;i<listaO.size();i++){
             if(!listaA.contains(listaO.get(i))){
                 return false;
