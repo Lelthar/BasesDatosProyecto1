@@ -5,6 +5,7 @@
  */
 package proyectobd1;
 
+import frames.VentanaConcatenacion;
 import frames.VentanaDiferenciaConjuntos;
 import frames.VentanaDivision;
 import frames.VentanaProductoCartesiano;
@@ -156,5 +157,19 @@ public class Administrador {
         DefaultTableModel modelo = new DefaultTableModel(datos,atributos);
         
         ventana.jTableResul.setModel(modelo);
+    }
+    
+    /**
+     * Metodo que permite cargas los datos en la tabla de la ventana División.
+     * @param ventana
+     * @throws SQLException 
+     */
+    public void tablaConcatenacion(VentanaConcatenacion ventana) throws SQLException{
+        String[] atributos = Singleton.getInstance().getConexionServidor().atributosCosulta();
+        String[][] datos = Singleton.getInstance().getConexionServidor().tuplasConsulta();
+        
+        DefaultTableModel modelo = new DefaultTableModel(datos,atributos);
+        
+        ventana.jTableResultado.setModel(modelo);
     }
 }

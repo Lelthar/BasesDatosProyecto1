@@ -384,4 +384,32 @@ public class ConexionServidor {
         return listaA;
     }
     
+    /*****************************************/
+    
+    
+    public ArrayList<String> atributosSinRepetir(ArrayList<String> lista1, ArrayList<String> lista2){
+        ArrayList<String> resultado = new ArrayList<>();
+        for(int i = 0; i < lista2.size(); i++){
+            if(!lista1.contains(lista2.get(i))){
+                resultado.add(lista2.get(i));
+            }
+        }
+        return resultado;
+    }
+    
+    public String construirSelectString(ArrayList<String> lista1,String nombreTabla1,ArrayList<String> lista2,String nombreTabla2){
+        String resultado = "";
+        for(int i = 0; i < lista1.size(); i++){
+            resultado += (nombreTabla1+"."+lista1.get(i)+",");
+        }
+        for(int i = 0; i < lista2.size(); i++){
+            if(i == (lista2.size()-1)){
+                resultado += (nombreTabla2+"."+lista2.get(i));
+            }else{
+                resultado += (nombreTabla2+"."+lista2.get(i)+",");
+            }
+        }
+        
+        return resultado;
+    }
 }
