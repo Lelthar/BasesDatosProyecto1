@@ -5,6 +5,7 @@
  */
 package proyectobd1;
 
+import frames.VentanaAgrupacion;
 import frames.VentanaDiferenciaConjuntos;
 import frames.VentanaDivision;
 import frames.VentanaProductoCartesiano;
@@ -145,7 +146,7 @@ public class Administrador {
     }
     
     /**
-     * Metodo que permite cargas los datos en la tabla de la ventana División.
+     * Metodo que permite cargas los datos en la tabla de la concatenación natural.
      * @param ventana
      * @throws SQLException 
      */
@@ -156,5 +157,5 @@ public class Administrador {
         DefaultTableModel modelo = new DefaultTableModel(datos,atributos);
         
         ventana.jTableResul.setModel(modelo);
-    }
+    }    
 }
