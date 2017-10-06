@@ -412,4 +412,27 @@ public class ConexionServidor {
         
         return resultado;
     }
+    
+    /**
+     * Función que valida que las operaciones sean correctas
+     * @param lista
+     * @return 
+     */
+    public boolean validarOperaciones(String lista){
+        ArrayList<String> listaO = convertirStringVector(lista);
+        for(int i=0;i<listaO.size();i++){
+            String ope = listaO.get(i);
+            System.out.println(listaO.get(i));
+            int o1 = ope.indexOf("sum");
+            int o2 = ope.indexOf("count");
+            int o3 = ope.indexOf("max");
+            int o4 = ope.indexOf("min");
+            int o5 = ope.indexOf("avg");
+            System.out.println(o1+" "+o2+" "+o3+" "+o4+" "+o5);
+            if(o1==-1 && o2==-1 && o3==-1 && o4==-1 && o5==-1){
+                return false;
+            }
+        }
+        return true;
+    }
 }
