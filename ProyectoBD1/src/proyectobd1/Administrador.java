@@ -127,4 +127,14 @@ public class Administrador {
     }
     
     
+    
+    public void tablaDivision(VentanaDivision ventana) throws SQLException{
+        String[] atributos = Singleton.getInstance().getConexionServidor().atributosCosulta();
+        String[][] datos = Singleton.getInstance().getConexionServidor().tuplasConsulta();
+        
+        DefaultTableModel modelo = new DefaultTableModel(datos,atributos);
+        
+        ventana.jTableResul.setModel(modelo);
+    }
+    
 }
