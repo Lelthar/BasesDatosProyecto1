@@ -6,6 +6,7 @@
 package frames;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -44,8 +45,6 @@ public class VentanaConcatenacion extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txfTablaResultado = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txAResultadoConsulta = new javax.swing.JTextArea();
         txfNombreTabla2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -55,6 +54,8 @@ public class VentanaConcatenacion extends javax.swing.JFrame {
         txAResultSQL = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableResultado = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,10 +71,6 @@ public class VentanaConcatenacion extends javax.swing.JFrame {
         jLabel2.setText("Predicado:");
 
         jLabel3.setText("Tabla Resultante:");
-
-        txAResultadoConsulta.setColumns(20);
-        txAResultadoConsulta.setRows(5);
-        jScrollPane1.setViewportView(txAResultadoConsulta);
 
         jLabel4.setText("Nombre Tabla 2: ");
 
@@ -96,44 +93,55 @@ public class VentanaConcatenacion extends javax.swing.JFrame {
 
         jLabel6.setText("Equivalente en SQL");
 
+        jTableResultado.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane4.setViewportView(jTableResultado);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ejecutarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ejecutarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(txfNombreTabla1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txfNombreTabla1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel2))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txfTablaResultado, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(txfPredicado)
-                                            .addComponent(txfNombreTabla2)))))
-                            .addComponent(jLabel3))
-                        .addGap(69, 69, 69)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txfTablaResultado, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txfPredicado)
+                                    .addComponent(txfNombreTabla2)))))
+                    .addComponent(jLabel3))
+                .addGap(69, 69, 69)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
                 .addGap(40, 40, 40))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,9 +177,9 @@ public class VentanaConcatenacion extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addComponent(txfTablaResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -206,22 +214,24 @@ public class VentanaConcatenacion extends javax.swing.JFrame {
                     }
                     if(!Singleton.getInstance().getConexionServidor().existeTablaP(txfTablaResultado.getText())){
                         try {
-                        Singleton.getInstance().getConexionServidor().realizarInstruccionSql(1,"SELECT * INTO  #"+txfTablaResultado.getText()+" FROM "+nombreTabla1+" INNER JOIN "+nombreTabla2+ " ON("+txfPredicado.getText()+")");
-                        //Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM #"+txfTablaResultado.getText());
-                        Singleton.getInstance().getConexionServidor().setRs(null);
-                        String consulta = "SELECT * FROM #"+txfTablaResultado.getText();
-                        Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0, consulta);
-                        Tabla nuevaTabla = new Tabla(txfTablaResultado.getText(),true,Singleton.getInstance().getConexionServidor().convertirVector2ArrayList(Singleton.getInstance().getConexionServidor().atributosCosulta()));
-                        Singleton.getInstance().getConexionServidor().agregarNombreTabla(nuevaTabla);
-                        //Funcion que hace la llamada para ver en la interfaz
-                        //Singleton.getInstance().getAdministrador().tablaSeleccion(this);
-                        //Singleton.getInstance().getAdministrador().tablaUnion(this);
-                        
-                        String consultaSql = "SELECT * FROM "+txfNombreTabla1.getText()+" INNER JOIN "+txfNombreTabla2.getText()+" ON ("+txfPredicado.getText()+")"+"\n\nNombre de la tabla resultado: "+txfTablaResultado.getText();
-                        String consultaAlgebra = txfTablaResultado.getText()+"<- "+txfNombreTabla1.getText()+" ⋈ ("+txfPredicado.getText()+") "+txfNombreTabla2.getText();
-                        
-                        txAResultSQL.setText(consultaSql);
-                        txAResultAlgebraR.setText(consultaAlgebra);
+                            ArrayList<String> lista2 = Singleton.getInstance().getConexionServidor().atributosSinRepetir(Singleton.getInstance().getConexionServidor().obtenerAtributos(nombreTabla1), Singleton.getInstance().getConexionServidor().obtenerAtributos(nombreTabla2));
+                            String selectString = Singleton.getInstance().getConexionServidor().construirSelectString(Singleton.getInstance().getConexionServidor().obtenerAtributos(nombreTabla1),nombreTabla1,lista2,nombreTabla2);
+                            Singleton.getInstance().getConexionServidor().realizarInstruccionSql(1,"SELECT "+selectString+" INTO  #"+txfTablaResultado.getText()+" FROM "+nombreTabla1+" INNER JOIN "+nombreTabla2+ " ON("+txfPredicado.getText()+")");
+                            //Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM #"+txfTablaResultado.getText());
+                            Singleton.getInstance().getConexionServidor().setRs(null);
+                            String consulta = "SELECT * FROM #"+txfTablaResultado.getText();
+                            Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0, consulta);
+                            Tabla nuevaTabla = new Tabla(txfTablaResultado.getText(),true,Singleton.getInstance().getConexionServidor().convertirVector2ArrayList(Singleton.getInstance().getConexionServidor().atributosCosulta()));
+                            Singleton.getInstance().getConexionServidor().agregarNombreTabla(nuevaTabla);
+                            //Funcion que hace la llamada para ver en la interfaz
+                            
+                            Singleton.getInstance().getAdministrador().tablaConcatenacion(this);
+
+                            String consultaSql = "SELECT * FROM "+txfNombreTabla1.getText()+" INNER JOIN "+txfNombreTabla2.getText()+" ON ("+txfPredicado.getText()+")"+"\n\nNombre de la tabla resultado: "+txfTablaResultado.getText();
+                            String consultaAlgebra = txfTablaResultado.getText()+"<- "+txfNombreTabla1.getText()+" ⋈ ("+txfPredicado.getText()+") "+txfNombreTabla2.getText();
+
+                            txAResultSQL.setText(consultaSql);
+                            txAResultAlgebraR.setText(consultaAlgebra);
                         
                         } catch (SQLException ex) {
                             //Logger.getLogger(VentanaUnion.class.getName()).log(Level.SEVERE, null, ex);
@@ -251,13 +261,16 @@ public class VentanaConcatenacion extends javax.swing.JFrame {
                 }
                    
                 try {
-                    Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM "+nombreTabla1+" INNER JOIN "+nombreTabla2+" ON("+txfPredicado.getText()+")");
+                    ArrayList<String> lista2 = Singleton.getInstance().getConexionServidor().atributosSinRepetir(Singleton.getInstance().getConexionServidor().obtenerAtributos(nombreTabla1), Singleton.getInstance().getConexionServidor().obtenerAtributos(nombreTabla2));
+                    String selectString = Singleton.getInstance().getConexionServidor().construirSelectString(Singleton.getInstance().getConexionServidor().obtenerAtributos(nombreTabla1),nombreTabla1,lista2,nombreTabla2);
+                    
+                    Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT "+selectString+" FROM "+nombreTabla1+" INNER JOIN "+nombreTabla2+" ON("+txfPredicado.getText()+")");
                     //Funcion que hace la llamada para ver en la interfaz
-                    //Singleton.getInstance().getAdministrador().tablaSeleccion(this);
-                    //Singleton.getInstance().getAdministrador().tablaUnion(this);
+                    
+                    Singleton.getInstance().getAdministrador().tablaConcatenacion(this);
 
                     String consultaSql = "SELECT * FROM "+txfNombreTabla1.getText()+" INNER JOIN "+txfNombreTabla2.getText()+" ON("+txfPredicado.getText()+")"+"\n\nNombre de la tabla resultado: "+txfTablaResultado.getText();
-                        String consultaAlgebra = txfTablaResultado.getText()+"<- "+txfNombreTabla1.getText()+" ⋈ ("+txfPredicado.getText()+") "+txfNombreTabla2.getText();
+                    String consultaAlgebra = txfTablaResultado.getText()+"<- "+txfNombreTabla1.getText()+" ⋈ ("+txfPredicado.getText()+") "+txfNombreTabla2.getText();
 
                     txAResultSQL.setText(consultaSql);
                     txAResultAlgebraR.setText(consultaAlgebra);
@@ -289,12 +302,12 @@ public class VentanaConcatenacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    public javax.swing.JTable jTableResultado;
     private javax.swing.JTextArea txAResultAlgebraR;
     private javax.swing.JTextArea txAResultSQL;
-    private javax.swing.JTextArea txAResultadoConsulta;
     private javax.swing.JTextField txfNombreTabla1;
     private javax.swing.JTextField txfNombreTabla2;
     private javax.swing.JTextField txfPredicado;
