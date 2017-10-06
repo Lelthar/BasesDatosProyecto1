@@ -137,6 +137,11 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
         });
 
         jButtonAgrupación.setText("Agrupación");
+        jButtonAgrupación.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgrupaciónActionPerformed(evt);
+            }
+        });
 
         jButtonSalir.setText("Salir");
         jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -286,6 +291,13 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
         this.setVisible(false);
         ventana.setVisible(true);
     }//GEN-LAST:event_jButtonConcaNaturalActionPerformed
+
+    private void jButtonAgrupaciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgrupaciónActionPerformed
+        // TODO add your handling code here:
+        VentanaAgrupacion ventana = new VentanaAgrupacion(this);
+        this.setVisible(false);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jButtonAgrupaciónActionPerformed
 
     /**
      * @param args the command line arguments
