@@ -104,6 +104,77 @@ public class ConexionServidor {
         }  
     }
     
+    /**
+     * Recibe el nombre de una tabla
+     * @param nombre
+     * @return Retorna nombrecolumna, tipo+tamaño, not null, pk, fk
+     * @throws SQLException 
+     */
+    public ArrayList<ArrayList<String>> definicionTabla(String nombre) throws SQLException{
+        metaDatos = con.getMetaData();
+        ResultSet defTabla = metaDatos.getColumns(null, null, nombre, null);
+        //System.out.println("Error1");
+        ResultSet defPk = metaDatos.getPrimaryKeys(null, null, nombre);
+        //System.out.println("Error2");
+        ResultSet defFk = metaDatos.getImportedKeys(null, null, nombre);
+        //System.out.println("Error3");
+        ArrayList<ArrayList<String>> defTablaV = new ArrayList<>();
+        ArrayList<String> defPkV = new ArrayList<>();
+        ArrayList<String> defFkV = new ArrayList<>();
+        
+        //encargado de leer nombre atributo, tipo + tamaño y si es not null
+        while(defTabla.next()){
+            //System.out.println(".-.");
+            ArrayList<String> res = new ArrayList<>();
+            res.add(defTabla.getString(4));
+            res.add(defTabla.getString(6)+defTabla.getString(7));
+            if("YES".equals(defTabla.getString(18))){
+                res.add("true");
+            }else{
+                res.add("false");
+            }
+            defTablaV.add(res);
+        }
+        //System.out.println("Aqui1");
+        //encargado de leer los atributos de la tabal que son pk
+        while(defPk.next()){
+            ArrayList<String> res = new ArrayList<>();
+            defPkV.add(defPk.getString(4));
+        }
+        //System.out.println("Aqui2");
+        //encargado de leer los atributos de la tabal que son fk
+        while(defFk.next()){
+            ArrayList<String> res = new ArrayList<>();
+            defFkV.add(defFk.getString(4));
+        }
+        for(int i=0;i<defTablaV.size();i++){
+            if(!defPkV.isEmpty()){
+                if(defPkV.contains(defTablaV.get(i).get(0))){
+                    defTablaV.get(i).add("true");
+                }else{
+                    defTablaV.get(i).add("false");
+                }
+            }else{
+                defTablaV.get(i).add("false");
+            }
+            
+           //System.out.println("------------");
+            if(!defFkV.isEmpty()){
+                if(defFkV.contains(defTablaV.get(i).get(0))){
+                    defTablaV.get(i).add("true");
+                }else{
+                    defTablaV.get(i).add("false");
+                }
+            }else{
+                defTablaV.get(i).add("false");
+            }
+            
+            //System.out.println("     --     ");
+        }
+        //System.out.println(defTablaV.toString());
+        return defTablaV;
+    }
+    
     public void agregarListaTablas() throws SQLException{
         if(con != null){
             ResultSet result = null;
@@ -129,6 +200,17 @@ public class ConexionServidor {
         }
         return false;
     
+    }
+    /**
+     * Metodo que retorna una lista con los nombres de las tablas
+     * @return 
+     */
+    public ArrayList<String> nombreTablas(){
+        ArrayList<String> result = new ArrayList<>();
+        for(int i=0;i<this.listaTablas.size();i++){
+            result.add(this.listaTablas.get(i).getNombre());
+        }
+        return result;
     }
     
     /**
