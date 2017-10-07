@@ -16,6 +16,7 @@ import frames.VentanaUnion;
 import frames.VentanaInterseccion;
 import frames.VentanaRenombrarAtributos;
 import frames.VentanaNaturalJoin;
+import frames.tablaBaseDatos;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -186,5 +187,23 @@ public class Administrador {
         DefaultTableModel modelo = new DefaultTableModel(datos,atributos);
         
         ventana.jTableProyec.setModel(modelo);
+    }
+    public void tablaAtributos(tablaBaseDatos ventana,ArrayList<ArrayList<String>> datos){
+        DefaultTableModel model = (DefaultTableModel) ventana.jTableResul.getModel();
+        int rows = model.getRowCount();
+        for(int i = rows - 1; i >=0; i--){
+                model.removeRow(i); 
+        }
+        for(int i=0;i<datos.size();i++){
+           model.addRow(new Object[]{
+               datos.get(i).get(0),
+               datos.get(i).get(1),
+               Boolean.valueOf(datos.get(i).get(2)),
+               Boolean.valueOf(datos.get(i).get(3)),
+               Boolean.valueOf(datos.get(i).get(4)),
+               false,null
+           }); 
+        }
+        ventana.jTableResul.setModel(model);
     }
 }

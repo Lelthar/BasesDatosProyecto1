@@ -56,6 +56,7 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
         jButtonAgregación = new javax.swing.JButton();
         jButtonAgrupación = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
+        jButtonAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -150,6 +151,13 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
             }
         });
 
+        jButtonAtras.setText("Atras");
+        jButtonAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtrasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,7 +166,9 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(330, 330, 330)
+                        .addGap(239, 239, 239)
+                        .addComponent(jButtonAtras)
+                        .addGap(18, 18, 18)
                         .addComponent(jButtonSalir))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -208,7 +218,9 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
                 .addContainerGap(90, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonSalir)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSalir)
+                    .addComponent(jButtonAtras))
                 .addContainerGap())
         );
 
@@ -299,6 +311,13 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
         ventana.setVisible(true);
     }//GEN-LAST:event_jButtonAgrupaciónActionPerformed
 
+    private void jButtonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtrasActionPerformed
+        // TODO add your handling code here:
+        MenuFunciones ventana = new MenuFunciones();
+        this.setVisible(false);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jButtonAtrasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -338,6 +357,7 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregación;
     private javax.swing.JButton jButtonAgrupación;
+    private javax.swing.JButton jButtonAtras;
     private javax.swing.JButton jButtonConcaNatural;
     private javax.swing.JButton jButtonConcatenacion;
     private javax.swing.JButton jButtonDiferenciaConjuntos;
