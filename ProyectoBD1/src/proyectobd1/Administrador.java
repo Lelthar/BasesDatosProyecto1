@@ -5,6 +5,7 @@
  */
 package proyectobd1;
 
+import frames.VentanaAgregacion;
 import frames.VentanaAgrupacion;
 import frames.VentanaConcatenacion;
 import frames.VentanaDiferenciaConjuntos;
@@ -205,5 +206,14 @@ public class Administrador {
            }); 
         }
         ventana.jTableResul.setModel(model);
+    }
+    
+    public void tablaAgregacion(VentanaAgregacion ventana) throws SQLException{
+        String[] atributos = Singleton.getInstance().getConexionServidor().atributosCosulta();
+        String[][] datos = Singleton.getInstance().getConexionServidor().tuplasConsulta();
+        
+        DefaultTableModel modelo = new DefaultTableModel(datos,atributos);
+        
+        ventana.jTableResultado.setModel(modelo);
     }
 }
