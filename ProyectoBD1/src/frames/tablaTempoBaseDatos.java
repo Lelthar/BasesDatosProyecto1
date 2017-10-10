@@ -60,6 +60,11 @@ public class tablaTempoBaseDatos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButtonSalir.setText("Salir");
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirActionPerformed(evt);
+            }
+        });
 
         jButtonEje.setText("Ejecutar");
         jButtonEje.addActionListener(new java.awt.event.ActionListener() {
@@ -273,6 +278,13 @@ public class tablaTempoBaseDatos extends javax.swing.JFrame {
                                             , "Opción incorrecta", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonSigueActionPerformed
+
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        // TODO add your handling code here:
+        MenuFunciones ventanaFunciones = new MenuFunciones();
+        this.setVisible(false);
+        ventanaFunciones.setVisible(true);
+    }//GEN-LAST:event_jButtonSalirActionPerformed
 
     /**
      * @param args the command line arguments
