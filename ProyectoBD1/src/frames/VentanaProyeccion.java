@@ -232,8 +232,8 @@ public class VentanaProyeccion extends javax.swing.JFrame {
                         //Funcion que hace la llamada para ver en la interfaz
                         Singleton.getInstance().getAdministrador().tablaProyeccion(this);
                         String consult = "SELECT "+jTextFieldExpr.getText()+" FROM "+nombreTabla;
-                        String algebra = "Π "+jTextFieldExpr.getText()+" ("+jTextFieldTabla.getText()+")";
-                        this.jTextAreaSql.setText(consult);
+                        String algebra = jTextFieldResult.getText()+" <- ( Π "+jTextFieldExpr.getText()+" ("+jTextFieldTabla.getText()+") )";
+                        this.jTextAreaSql.setText(consult+"\n \nNombre de la tabla resultado: "+jTextFieldResult.getText());
                         this.jTextAreaAlg.setText(algebra);
 
                         }catch(SQLException ex){

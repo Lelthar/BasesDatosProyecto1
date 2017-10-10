@@ -530,4 +530,16 @@ public class ConexionServidor {
         }
         return true;
     }
+    
+    public String atributosNoEncotrados(String nombreTabla1,String nombreTabla2){
+        String result = "";
+        ArrayList<String> listaA = obtenerAtributos(nombreTabla1);
+        ArrayList<String> listaO = obtenerAtributos(nombreTabla2);
+        for(int i=0;i<listaO.size();i++){
+            if(!listaA.contains(listaO.get(i))){
+                result+= listaO.get(i)+", ";
+            }
+        }
+        return result;
+    }
 }
