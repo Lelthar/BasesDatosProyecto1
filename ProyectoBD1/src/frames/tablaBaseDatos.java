@@ -279,6 +279,9 @@ public class tablaBaseDatos extends javax.swing.JFrame {
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         // TODO add your handling code here:
+        MenuFunciones ventanaFunciones = new MenuFunciones();
+        this.setVisible(false);
+        ventanaFunciones.setVisible(true);
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
     /**
