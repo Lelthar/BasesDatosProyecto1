@@ -230,8 +230,8 @@ public class VentanaInterseccion extends javax.swing.JFrame {
                                     String int1="SELECT * FROM " + jTextFieldTabla1.getText();
                                     String int2="SELECT * FROM " + jTextFieldTabla1.getText();
                                     String consult = int1 +"\n INTERSECT \n"+int2;
-                                    String algebra = "( "+jTextFieldTabla1.getText()+" ∩ "+jTextFieldTabla1.getText()+" )";
-                                    this.jTextAreaSql.setText(consult);
+                                    String algebra = jTextFieldResul.getText()+" <- ( "+jTextFieldTabla1.getText()+" ∩ "+jTextFieldTabla1.getText()+" )";
+                                    this.jTextAreaSql.setText(consult+"\n \nNombre de la tabla resultado: "+jTextFieldResul.getText());
                                     this.jTextAreaAlg.setText(algebra);
 
                                 } catch (SQLException ex) {

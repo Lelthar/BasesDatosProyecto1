@@ -225,8 +225,8 @@ public class VentanaProductoCartesiano extends javax.swing.JFrame {
 
                                 Singleton.getInstance().getAdministrador().tablaProductoCartesiano(this);
                                 String consult = "SELECT * FROM "+nombreTabla1+", "+ nombreTabla2;
-                                String algebra = "( "+nombreTabla1+" X "+nombreTabla2+" )";
-                                this.jTextAreaSql.setText(consult);
+                                String algebra = jTextFieldResul.getText()+" <- ( ( "+nombreTabla1+" X "+nombreTabla2+" ) )";
+                                this.jTextAreaSql.setText(consult+"\n \nNombre de la tabla resultado: "+jTextFieldResul.getText());
                                 this.jTextAreaAlg.setText(algebra);
 
                             } catch (SQLException ex) {
