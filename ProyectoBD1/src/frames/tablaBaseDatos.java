@@ -61,6 +61,11 @@ public class tablaBaseDatos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButtonSalir.setText("Salir");
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirActionPerformed(evt);
+            }
+        });
 
         jButtonEje.setText("Ejecutar");
         jButtonEje.addActionListener(new java.awt.event.ActionListener() {
@@ -181,28 +186,33 @@ public class tablaBaseDatos extends javax.swing.JFrame {
             if(!tabla.isEmpty()){
                 if(!tabla.equals("TODAS")){
                     if(Singleton.getInstance().getConexionServidor().existeTablaP(jTextFieldTabla.getText())){
-                        String nombreTabla ="";
-                        //if(Singleton.getInstance().getConexionServidor().esTablaTemporalP(jTextFieldTabla.getText())){
-                          //  nombreTabla = "#"+jTextFieldTabla.getText();
-                        //}else{
-                            nombreTabla = jTextFieldTabla.getText();
-                        //}
-                        ArrayList<ArrayList<String>> result =Singleton.getInstance().getConexionServidor().definicionTabla(nombreTabla);
-                        //System.out.println(result.size()+" -> "+nombreTabla );
-                        Singleton.getInstance().getAdministrador().tablaAtributos(this, result);
-                        jLabelTablaAct.setText(jTextFieldTabla.getText());
-                        jTextFieldTabla.setText("");
-                        System.out.println("Consutal lista");
+                        if(!Singleton.getInstance().getConexionServidor().esTablaTemporalP(jTextFieldTabla.getText())){
+                            String nombreTabla ="";
+                            //if(Singleton.getInstance().getConexionServidor().esTablaTemporalP(jTextFieldTabla.getText())){
+                              //  nombreTabla = "#"+jTextFieldTabla.getText();
+                            //}else{
+                                nombreTabla = jTextFieldTabla.getText();
+                            //}
+                            ArrayList<ArrayList<String>> result =Singleton.getInstance().getConexionServidor().definicionTabla(nombreTabla);
+                            //System.out.println(result.size()+" -> "+nombreTabla );
+                            Singleton.getInstance().getAdministrador().tablaAtributos(this, result);
+                            jLabelTablaAct.setText(jTextFieldTabla.getText());
+                            jTextFieldTabla.setText("");
+                            System.out.println("Consutal lista");
+                        }else{
+                            JOptionPane.showMessageDialog(this, "Error la tabla: "+tabla+" es una tabla temporal.", "Es tabla temporal", JOptionPane.ERROR_MESSAGE);
+                        }
+                        
                     }else{
                         JOptionPane.showMessageDialog(this, "Error la tabla: "
                                 +tabla+" no existe.", "No existe tabla", JOptionPane.ERROR_MESSAGE);
                     }
                 }else{
                     System.out.println("TODAS");
-                    tablas = Singleton.getInstance().getConexionServidor().nombreTablas();
+                    tablas = Singleton.getInstance().getConexionServidor().nombreTablas(true);
                     ArrayList<ArrayList<String>> result =Singleton.getInstance().getConexionServidor().definicionTabla(tablas.get(actual));
                         //System.out.println(result.size()+" -> "+nombreTabla );
-                        Singleton.getInstance().getAdministrador().tablaAtributos(this, result);
+                    Singleton.getInstance().getAdministrador().tablaAtributos(this, result);
                     jLabelTablaAct.setText(tablas.get(actual));
                     actual+=1;
                     jTextFieldTabla.setText("");
@@ -266,6 +276,10 @@ public class tablaBaseDatos extends javax.swing.JFrame {
                                             , "Opción incorrecta", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonSigueActionPerformed
+
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSalirActionPerformed
 
     /**
      * @param args the command line arguments

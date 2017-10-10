@@ -112,12 +112,13 @@ public class ConexionServidor {
      */
     public ArrayList<ArrayList<String>> definicionTabla(String nombre) throws SQLException{
         metaDatos = con.getMetaData();
-        ResultSet defTabla = metaDatos.getColumns(null, null, nombre, null);
-        //System.out.println("Error1");
+        
+        ResultSet defTabla = metaDatos.getColumns(null, "dbo", nombre, null);
+ 
         ResultSet defPk = metaDatos.getPrimaryKeys(null, null, nombre);
-        //System.out.println("Error2");
+        //System.out.println(defPk);
         ResultSet defFk = metaDatos.getImportedKeys(null, null, nombre);
-        //System.out.println("Error3");
+        //System.out.println(defFk);
         ArrayList<ArrayList<String>> defTablaV = new ArrayList<>();
         ArrayList<String> defPkV = new ArrayList<>();
         ArrayList<String> defFkV = new ArrayList<>();
@@ -202,14 +203,26 @@ public class ConexionServidor {
     
     }
     /**
+     * Si es true el tipo, devuelve las permanentes, si no devuelve las permanentes
      * Metodo que retorna una lista con los nombres de las tablas
      * @return 
      */
-    public ArrayList<String> nombreTablas(){
+    public ArrayList<String> nombreTablas(boolean tipo){
         ArrayList<String> result = new ArrayList<>();
-        for(int i=0;i<this.listaTablas.size();i++){
-            result.add(this.listaTablas.get(i).getNombre());
+        if(tipo){
+            for(int i=0;i<this.listaTablas.size();i++){
+                if(!this.listaTablas.get(i).getTemporal()){
+                    result.add(this.listaTablas.get(i).getNombre());
+                }
+            }
+        }else{
+            for(int i=0;i<this.listaTablas.size();i++){
+                if(this.listaTablas.get(i).getTemporal()){
+                    result.add(this.listaTablas.get(i).getNombre());
+                }
+            }
         }
+        
         return result;
     }
     
