@@ -236,4 +236,23 @@ public class Administrador {
         
         ventana.jTableResultado.setModel(modelo);
     }
+    
+    public void tablaTemporales(tablaTempoBaseDatos ventana) throws SQLException{
+        String[][] datos = Singleton.getInstance().getConexionServidor().tuplasConsulta();
+        
+        String [] atributos1 = {"Nombre Atributo","Not null","Tipo dato","Tamaño dato"};
+        String[][] datos1 = new String[datos.length][4];
+
+        int largo = datos.length;
+        for(int i=0;i<largo;i++){
+            String[] res = datos[i];
+            String[] res1 = {res[3],res[6],res[7],res[8]};
+            datos1[i]=res1;
+        }
+        
+        DefaultTableModel modelo = new DefaultTableModel(datos1,atributos1);
+        
+        ventana.jTableResul.setModel(modelo);
+    }
+    
 }

@@ -77,17 +77,14 @@ public class tablaTempoBaseDatos extends javax.swing.JFrame {
 
         jTableResul.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Nombre Atributo", "Tipo Dato", "Primary Key", "Foreign Key", "Unique", "Check", "Not Null"
+                "Nombre Atributo", "Not Null", "Tipo Dato", "Tamaño dato"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.String.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -188,17 +185,14 @@ public class tablaTempoBaseDatos extends javax.swing.JFrame {
                 if(!tabla.equals("TODAS")){
                     if(Singleton.getInstance().getConexionServidor().existeTablaP(jTextFieldTabla.getText())){
                         if(Singleton.getInstance().getConexionServidor().esTablaTemporalP(jTextFieldTabla.getText())){
-                            String nombreTabla ="";
-                            //if(Singleton.getInstance().getConexionServidor().esTablaTemporalP(jTextFieldTabla.getText())){
-                              //  nombreTabla = "#"+jTextFieldTabla.getText();
-                            //}else{
-                                nombreTabla = jTextFieldTabla.getText();
-                            //}
-                            ArrayList<ArrayList<String>> result =Singleton.getInstance().getConexionServidor().definicionTabla("#"+nombreTabla);
-                            //System.out.println(result.size()+" -> "+nombreTabla );
-                            Singleton.getInstance().getAdministrador().tablaAtributosTemporales(this, result);
+                            
+                            String consul = "SELECT * FROM tempdb.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME like '#"+jTextFieldTabla.getText()+"%'";
+                            Singleton.getInstance().getConexionServidor().definicionTablaTemporal(consul);
+                           
+                            Singleton.getInstance().getAdministrador().tablaTemporales(this);
                             jLabelTablaAct.setText(jTextFieldTabla.getText());
                             jTextFieldTabla.setText("");
+                            
                             System.out.println("Consutal lista");
                         }else{
                             JOptionPane.showMessageDialog(this, "Error la tabla: "+tabla+" es una tabla temporal.", "Es tabla temporal", JOptionPane.ERROR_MESSAGE);
@@ -210,15 +204,22 @@ public class tablaTempoBaseDatos extends javax.swing.JFrame {
                     }
                 }else{
                     System.out.println("TODAS");
+                    
                     tablas = Singleton.getInstance().getConexionServidor().nombreTablas(false);
-                    ArrayList<ArrayList<String>> result =Singleton.getInstance().getConexionServidor().definicionTabla(tablas.get(actual));
+                    if(!tablas.isEmpty()){
+                        String consul = "SELECT * FROM tempdb.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME like '#"+tablas.get(actual)+"%'";
+                        Singleton.getInstance().getConexionServidor().definicionTablaTemporal(consul);
                    
                         //System.out.println(result.size()+" -> "+nombreTabla );
-                    Singleton.getInstance().getAdministrador().tablaAtributosTemporales(this, result);
-                    jLabelTablaAct.setText(tablas.get(actual));
-                    actual+=1;
-                    jTextFieldTabla.setText("");
-                    
+                        Singleton.getInstance().getAdministrador().tablaTemporales(this);
+                        jLabelTablaAct.setText(tablas.get(actual));
+                        actual+=1;
+                        jTextFieldTabla.setText("");
+                    }else{
+                        JOptionPane.showMessageDialog(this, "No se han creado tablas temporales"
+                                        , "No tablas Temporales", JOptionPane.ERROR_MESSAGE);
+                    }
+                     
                 }
             }else{
                 JOptionPane.showMessageDialog(this, "El nombre de la tabla se encuentra vacio"
@@ -235,9 +236,11 @@ public class tablaTempoBaseDatos extends javax.swing.JFrame {
             if(actual>=1){
                 try {
                     actual-=1;
-                    ArrayList<ArrayList<String>> result =Singleton.getInstance().getConexionServidor().definicionTabla("#"+tablas.get(actual));
-                    //System.out.println(result.size()+" -> "+nombreTabla );
-                    Singleton.getInstance().getAdministrador().tablaAtributosTemporales(this, result);
+                    String consul = "SELECT * FROM tempdb.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME like '#"+tablas.get(actual)+"%'";
+                        Singleton.getInstance().getConexionServidor().definicionTablaTemporal(consul);
+                   
+                        //System.out.println(result.size()+" -> "+nombreTabla );
+                    Singleton.getInstance().getAdministrador().tablaTemporales(this);
                     jLabelTablaAct.setText(tablas.get(actual));
                     jTextFieldTabla.setText("");
                 } catch (SQLException ex) {
@@ -260,9 +263,11 @@ public class tablaTempoBaseDatos extends javax.swing.JFrame {
             if(actual<tablas.size()-1){
                 try {
                     actual+=1;
-                    ArrayList<ArrayList<String>> result =Singleton.getInstance().getConexionServidor().definicionTabla("#"+tablas.get(actual));
+                    String consul = "SELECT * FROM tempdb.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME like '#"+tablas.get(actual)+"%'";
+                    Singleton.getInstance().getConexionServidor().definicionTablaTemporal(consul);
+                   
                     //System.out.println(result.size()+" -> "+nombreTabla );
-                    Singleton.getInstance().getAdministrador().tablaAtributosTemporales(this, result);
+                    Singleton.getInstance().getAdministrador().tablaTemporales(this);
                     jLabelTablaAct.setText(tablas.get(actual));
                     jTextFieldTabla.setText("");
                 } catch (SQLException ex) {
