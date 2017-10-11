@@ -5,6 +5,7 @@
  */
 package frames;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -169,6 +170,18 @@ public class MenuFunciones extends javax.swing.JFrame {
 
     private void ayudaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ayudaBtnActionPerformed
         // TODO add your handling code here:
+        try {
+            if ((new File("ManualUsuario.pdf")).exists()) {
+                Process p = Runtime.getRuntime()
+			   .exec("rundll32 url.dll,FileProtocolHandler ManualUsuario.pdf");
+			p.waitFor();
+            } else {
+                System.out.println("Archivo no existe");
+            }
+            System.out.println("Listo");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_ayudaBtnActionPerformed
 
     private void operacionesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operacionesBtnActionPerformed
