@@ -11,23 +11,12 @@ package frames;
  */
 public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
     
-    VentanaSeleccion ventanaSeleccion;
-    VentanaUnion ventanaUnion;
-    VentanaRenombrarAtributos ventanaRenombrar;
-    VentanaDiferenciaConjuntos ventanaDiferenciaConjuntos;
-    VentanaConcatenacion ventanaConcatenacion;
-    VentanaAgregacion ventanaAgregacion;
     /**
      * Creates new form OperacionesAlgebraRelacional
      */
     public OperacionesAlgebraRelacional() {
         initComponents();
-        ventanaSeleccion = new VentanaSeleccion(this);
-        ventanaUnion = new VentanaUnion(this);
-        ventanaRenombrar = new VentanaRenombrarAtributos(this);
-        ventanaDiferenciaConjuntos = new VentanaDiferenciaConjuntos(this);
-        ventanaConcatenacion = new VentanaConcatenacion(this);
-        ventanaAgregacion = new VentanaAgregacion(this);
+    
         this.setTitle("Menu de operaciones de álgebra relacional");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -229,19 +218,21 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
 
     private void jButtonAgregaciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregaciónActionPerformed
         // TODO add your handling code here:
-        this.ventanaAgregacion.setVisible(true);
+        VentanaAgregacion ventanaAgregacion = new VentanaAgregacion(this);
+        ventanaAgregacion.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonAgregaciónActionPerformed
 
     private void jButtonSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionActionPerformed
-        // TODO add your handling code here:
-        this.ventanaSeleccion.setVisible(true);
+        VentanaSeleccion ventanaSeleccion = new VentanaSeleccion(this);
+        ventanaSeleccion.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonSeleccionActionPerformed
 
     private void jButtonUnionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUnionActionPerformed
         // TODO add your handling code here:
-        this.ventanaUnion.setVisible(true);
+        VentanaUnion ventanaUnion = new VentanaUnion(this);
+        ventanaUnion.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonUnionActionPerformed
 
@@ -253,19 +244,22 @@ public class OperacionesAlgebraRelacional extends javax.swing.JFrame {
 
     private void jButtonRenombrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRenombrarActionPerformed
         // TODO add your handling code here:
-        this.ventanaRenombrar.setVisible(true);
+        VentanaRenombrarAtributos ventanaRenombrar = new VentanaRenombrarAtributos(this);
+        ventanaRenombrar.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonRenombrarActionPerformed
 
     private void jButtonDiferenciaConjuntosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDiferenciaConjuntosActionPerformed
         // TODO add your handling code here:
-        this.ventanaDiferenciaConjuntos.setVisible(true);
+        VentanaDiferenciaConjuntos ventanaDiferenciaConjuntos = new VentanaDiferenciaConjuntos(this);
+        ventanaDiferenciaConjuntos.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonDiferenciaConjuntosActionPerformed
 
     private void jButtonConcatenacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConcatenacionActionPerformed
         // TODO add your handling code here:
-        this.ventanaConcatenacion.setVisible(true);
+        VentanaConcatenacion ventanaConcatenacion = new VentanaConcatenacion(this);
+        ventanaConcatenacion.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonConcatenacionActionPerformed
 
