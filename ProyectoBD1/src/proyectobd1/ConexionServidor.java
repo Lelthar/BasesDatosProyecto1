@@ -176,6 +176,29 @@ public class ConexionServidor {
         return defTablaV;
     }
     
+    /**
+     * Recibe el nombre de una tabla
+     * @param consulta
+     * @return Retorna nombrecolumna, tipo+tamaño, not null, pk, fk
+     * @throws SQLException 
+     */
+    public ArrayList<ArrayList<String>> definicionTablaTemporal(String consulta) throws SQLException{
+        ArrayList<ArrayList<String>> defTablaV = new ArrayList<>();
+        this.rs = null;
+        this.rs = stmt.executeQuery(consulta);
+        this.rsCantidadColumnas = rs.getMetaData();
+        // Recorre las tuplas de la tabla , hay que arreglar las consultas con las columnas
+//        while (rs.next()) {
+//            for(int i = 0; i < rsCantidadColumnas.getColumnCount(); i++){
+//                System.out.print(rs.getString(i+1) + " ");  
+//            }
+//            System.out.println("");
+//        }
+        System.out.println("Consulta realizada...");
+        
+        return defTablaV;
+    }
+    
     public void agregarListaTablas() throws SQLException{
         if(con != null){
             ResultSet result = null;
@@ -531,4 +554,15 @@ public class ConexionServidor {
         return true;
     }
     
+    public String atributosNoEncotrados(String nombreTabla1,String nombreTabla2){
+        String result = "";
+        ArrayList<String> listaA = obtenerAtributos(nombreTabla1);
+        ArrayList<String> listaO = obtenerAtributos(nombreTabla2);
+        for(int i=0;i<listaO.size();i++){
+            if(!listaA.contains(listaO.get(i))){
+                result+= listaO.get(i)+", ";
+            }
+        }
+        return result;
+    }
 }
