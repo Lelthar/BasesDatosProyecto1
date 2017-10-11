@@ -34,13 +34,19 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="fd" green="d8" red="c9" type="rgb"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="253" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="cambiarUsuarioBtn" min="-2" pref="230" max="-2" attributes="0"/>
                       <Component id="salirBtn" min="-2" pref="230" max="-2" attributes="0"/>
                       <Component id="acercaDeBtn" min="-2" pref="230" max="-2" attributes="0"/>
                       <Component id="verReferenciaCruzadaAtributoTablaBtn" min="-2" pref="230" max="-2" attributes="0"/>
@@ -49,14 +55,14 @@
                       <Component id="operacionesBtn" min="-2" pref="230" max="-2" attributes="0"/>
                       <Component id="ayudaBtn" min="-2" pref="230" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="317" max="32767" attributes="0"/>
+                  <EmptySpace pref="90" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Component id="operacionesBtn" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="tablasBaseDatosBtn" min="-2" pref="45" max="-2" attributes="0"/>
@@ -65,12 +71,14 @@
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="verReferenciaCruzadaAtributoTablaBtn" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="cambiarUsuarioBtn" min="-2" pref="45" max="-2" attributes="0"/>
+                  <EmptySpace pref="35" max="32767" attributes="0"/>
                   <Component id="ayudaBtn" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="acercaDeBtn" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="salirBtn" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace pref="61" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -130,6 +138,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salirBtnActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="cambiarUsuarioBtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cambiar usuario"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cambiarUsuarioBtnActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
