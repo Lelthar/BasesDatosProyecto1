@@ -26,6 +26,9 @@ public class VentanaSeleccion extends javax.swing.JFrame {
     public VentanaSeleccion(OperacionesAlgebraRelacional pVentanaOperaciones) {
         initComponents();
         this.ventanaOperaciones = pVentanaOperaciones;
+        this.setTitle("Realización de Selección");
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**

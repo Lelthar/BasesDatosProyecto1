@@ -256,10 +256,10 @@ public class VentanaAgrupacion extends javax.swing.JFrame {
                             //Funcion que hace la llamada para ver en la interfaz
                             Singleton.getInstance().getAdministrador().tablaAgrupacion(this);
                             String consult = "SELECT "+jTextFieldExpr.getText()+","+jTextFieldOper.getText()+" FROM "+nombreTabla+" GROUP BY "+jTextFieldExpr.getText();
-                            String algebra = jTextFieldExpr.getText()+" Ģ "+jTextFieldOper.getText()+" ( "+jTextFieldTabla.getText()+" ) ";
+                            String algebra = jTextFieldResult.getText()+" <- ("+jTextFieldExpr.getText()+" Ģ "+jTextFieldOper.getText()+" ( "+jTextFieldTabla.getText()+" )) ";
                             //this.jTextAreaSql.setText(consult);
                             this.jTextAreaAlg.setText(algebra);
-
+                            this.jTextAreaSql.setText(consult+"\n \nNombre de la tabla resultado: "+jTextFieldResult.getText());
                             }catch(SQLException ex){
                                 JOptionPane.showMessageDialog(this, "Ocurrio algun error inesperado durante"
                                             +" la ejecución, revisar los datos sean correctos", "Error inesperado", JOptionPane.ERROR_MESSAGE);
