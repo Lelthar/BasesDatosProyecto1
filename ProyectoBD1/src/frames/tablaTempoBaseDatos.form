@@ -136,15 +136,33 @@
         <Component class="javax.swing.JTable" name="jTableResul">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="0">
+              <Table columnCount="7" rowCount="4">
                 <Column editable="true" title="Nombre Atributo" type="java.lang.Object"/>
-                <Column editable="true" title="Not Null" type="java.lang.Boolean"/>
                 <Column editable="true" title="Tipo Dato" type="java.lang.Object"/>
-                <Column editable="true" title="Tama&#xf1;o dato" type="java.lang.Object"/>
+                <Column editable="true" title="Primary Key" type="java.lang.Boolean"/>
+                <Column editable="true" title="Foreign Key" type="java.lang.Boolean"/>
+                <Column editable="true" title="Unique" type="java.lang.Boolean"/>
+                <Column editable="true" title="Check" type="java.lang.String"/>
+                <Column editable="true" title="Not Null" type="java.lang.Boolean"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
