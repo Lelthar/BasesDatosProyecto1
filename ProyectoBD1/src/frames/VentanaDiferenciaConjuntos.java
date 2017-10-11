@@ -25,7 +25,7 @@ public class VentanaDiferenciaConjuntos extends javax.swing.JFrame {
     public VentanaDiferenciaConjuntos(OperacionesAlgebraRelacional pVentanaOperaciones) {
         initComponents();
         this.ventanaOperaciones = pVentanaOperaciones;
-        this.setTitle("Realización de Intersección");
+        this.setTitle("Realización de Diferencia de Conjuntos");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }

@@ -35,7 +35,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="jButtonProyeccion" max="32767" attributes="0"/>
-                          <Component id="jButtonUnion" alignment="1" pref="150" max="32767" attributes="0"/>
+                          <Component id="jButtonUnion" alignment="1" max="32767" attributes="0"/>
                           <Component id="jButtonSeleccion" alignment="1" max="32767" attributes="0"/>
                           <Component id="jButtonDiferenciaConjuntos" alignment="1" max="32767" attributes="0"/>
                           <Component id="jButtonProductoCartesiano" alignment="1" max="32767" attributes="0"/>
