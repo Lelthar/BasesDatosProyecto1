@@ -6,7 +6,6 @@
 package frames;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import proyectobd1.Singleton;
 import proyectobd1.Tabla;
@@ -215,23 +214,8 @@ public class VentanaDivision extends javax.swing.JFrame {
                                     }else{
                                         nombreTabla2 = jTextFieldTabla2.getText();
                                     }
-                                    String consult = "SELECT * INTO #"+jTextFieldResul.getText()+" FROM "+nombreTabla1+" WHERE NOT EXISTS "
-                                                   + "(SELECT * FROM "+nombreTabla2+" WHERE ";
-                                    String consult1 = "SELECT * FROM "+jTextFieldTabla1.getText()+" WHERE NOT EXISTS "
-                                                   + "(SELECT * FROM "+jTextFieldTabla2.getText()+" WHERE ";
-                                    ArrayList<String> atr2 = Singleton.getInstance().getConexionServidor().obtenerAtributos(jTextFieldTabla2.getText());
-                                    for(int i=0;i<atr2.size();i++){
-                                        consult+=nombreTabla1+"."+atr2.get(i)+"="+nombreTabla2+"."+atr2.get(i);
-                                        consult1+=jTextFieldTabla1.getText()+"."+atr2.get(i)+"="+jTextFieldTabla2.getText()+"."+atr2.get(i);
-                                        if(i!=atr2.size()-1){
-                                            consult+=" AND ";
-                                            consult1+=" AND ";
-                                        }
-                                    }
-                                    consult+=")";
-                                    consult1+=")";
-                                    String algebra = jTextFieldResul.getText()+" <- ( "+jTextFieldTabla1.getText()+" ÷ "+jTextFieldTabla2.getText()+" )";
-                                    Singleton.getInstance().getConexionServidor().realizarInstruccionSql(1,consult);
+
+                                    Singleton.getInstance().getConexionServidor().realizarInstruccionSql(1,"SELECT * INTO  #"+jTextFieldResul.getText()+" FROM "+nombreTabla1+" INTERSECT SELECT * FROM " +nombreTabla2);
                                     //Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,"SELECT * FROM #"+jTextFieldResul.getText());
                                     //Singleton.getInstance().getConexionServidor().setRs(null);
 
@@ -241,16 +225,20 @@ public class VentanaDivision extends javax.swing.JFrame {
                                     Tabla nuevaTabla = new Tabla(jTextFieldResul.getText(),true,Singleton.getInstance().getConexionServidor().convertirVector2ArrayList(Singleton.getInstance().getConexionServidor().atributosCosulta()));
                                     Singleton.getInstance().getConexionServidor().agregarNombreTabla(nuevaTabla);
 
-                                    Singleton.getInstance().getAdministrador().tablaDivision(this);                                 
-                                    this.jTextAreaSql.setText(consult1+"\n \nNombre de la tabla resultado: "+jTextFieldResul.getText());
+                                    Singleton.getInstance().getAdministrador().tablaDivision(this);
+                                    String int1="SELECT * FROM " + jTextFieldTabla1.getText();
+                                    String int2="SELECT * FROM " + jTextFieldTabla1.getText();
+                                    String consult = int1 +"\n INTERSECT \n"+int2;
+                                    String algebra = "( "+jTextFieldTabla1.getText()+" ∩ "+jTextFieldTabla1.getText()+" )";
+                                    this.jTextAreaSql.setText(consult);
                                     this.jTextAreaAlg.setText(algebra);
+
                                 } catch (SQLException ex) {
                                     JOptionPane.showMessageDialog(this, "Ocurrio algun error inesperado durante"
                                             +" la ejecución", "Error inesperado", JOptionPane.ERROR_MESSAGE);
                                 }
                             }else{
-                                String repe = Singleton.getInstance().getConexionServidor().atributosNoEncotrados(jTextFieldTabla1.getText(),jTextFieldTabla2.getText());
-                                JOptionPane.showMessageDialog(this, "El atributo: "+repe+" de la tabla "
+                                JOptionPane.showMessageDialog(this, "El atributo: "+" de la tabla "
                                             +jTextFieldTabla2.getText()+" no se encuetra en la tabla "
                                             +jTextFieldTabla1.getText(), "No existe un atributo", JOptionPane.ERROR_MESSAGE);
                             }
@@ -287,35 +275,22 @@ public class VentanaDivision extends javax.swing.JFrame {
                                 }else{
                                     nombreTabla2 = jTextFieldTabla2.getText();
                                 }
-                                String consult = "SELECT * FROM "+nombreTabla1+" WHERE NOT EXISTS "
-                                               + "(SELECT * FROM "+nombreTabla2+" WHERE ";
-                                String consult1 = "SELECT * FROM "+jTextFieldTabla1.getText()+" WHERE NOT EXISTS "
-                                               + "(SELECT * FROM "+jTextFieldTabla2.getText()+" WHERE ";
-                                ArrayList<String> atr2 = Singleton.getInstance().getConexionServidor().obtenerAtributos(jTextFieldTabla2.getText());
-                                for(int i=0;i<atr2.size();i++){
-                                    consult+=nombreTabla1+"."+atr2.get(i)+"="+nombreTabla2+"."+atr2.get(i);
-                                    consult1+=jTextFieldTabla1.getText()+"."+atr2.get(i)+"="+jTextFieldTabla2.getText()+"."+atr2.get(i);
-                                    if(i!=atr2.size()-1){
-                                        consult+=" AND ";
-                                        consult1+=" AND ";
-                                    }
-                                }
-                                consult+=")";
-                                consult1+=")";
-                                String algebra = "( "+jTextFieldTabla1.getText()+" ÷ "+jTextFieldTabla2.getText()+" )";
-                                this.jTextAreaSql.setText(consult1);
-                                this.jTextAreaAlg.setText(algebra);
+                                String int1="SELECT * FROM " + jTextFieldTabla1.getText();
+                                String int2="SELECT * FROM " + jTextFieldTabla2.getText();
+                                String consultA = int1 +"\n INTERSECT \n"+int2; 
+                                String consult = "SELECT * FROM "+nombreTabla1+" intersect SELECT * FROM "+ nombreTabla2;
+                                String algebra = "( "+int1+" ∩ "+int2+" )";
                                 Singleton.getInstance().getConexionServidor().realizarInstruccionSql(0,consult);
                                 Singleton.getInstance().getAdministrador().tablaDivision(this);
-                                
+                                this.jTextAreaSql.setText(consultA);
+                                this.jTextAreaAlg.setText(algebra);
 
                             } catch (SQLException ex) {
                                 JOptionPane.showMessageDialog(this, "Ocurrio algun error inesperado durante"
                                         +" la ejecución", "Error inesperado", JOptionPane.ERROR_MESSAGE);
                             }
                         }else{
-                            String repe = Singleton.getInstance().getConexionServidor().atributosNoEncotrados(jTextFieldTabla1.getText(),jTextFieldTabla2.getText());
-                                JOptionPane.showMessageDialog(this, "El atributo: "+repe+" de la tabla "
+                            JOptionPane.showMessageDialog(this, "El atributo: "+" de la tabla "
                                             +jTextFieldTabla2.getText()+" no se encuetra en la tabla "
                                             +jTextFieldTabla1.getText(), "No existe un atributo", JOptionPane.ERROR_MESSAGE);
                         }
