@@ -18,6 +18,7 @@ public class MenuFunciones extends javax.swing.JFrame {
     tablaTempoBaseDatos ventanaTablasT;
     ventanaReferenciaAtributosTablas ventanaReferencia;
     
+    
     public MenuFunciones() {
         initComponents();
         this.setTitle("Menu de operaciones del programa");
@@ -26,6 +27,7 @@ public class MenuFunciones extends javax.swing.JFrame {
         ventana = new OperacionesAlgebraRelacional();
         ventanaTablasP = new tablaBaseDatos();
         ventanaTablasT = new tablaTempoBaseDatos();
+        ventanaReferencia = new ventanaReferenciaAtributosTablas();
     }
 
     /**
