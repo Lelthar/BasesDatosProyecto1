@@ -16,6 +16,7 @@ public class MenuFunciones extends javax.swing.JFrame {
      */
     tablaBaseDatos ventanaTablasP;
     tablaTempoBaseDatos ventanaTablasT;
+    ventanaReferenciaAtributosTablas ventanaReferencia;
     
     public MenuFunciones() {
         initComponents();
@@ -173,6 +174,8 @@ public class MenuFunciones extends javax.swing.JFrame {
 
     private void verReferenciaCruzadaAtributoTablaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verReferenciaCruzadaAtributoTablaBtnActionPerformed
         // TODO add your handling code here:
+        ventanaReferencia.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_verReferenciaCruzadaAtributoTablaBtnActionPerformed
 
     private void acercaDeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acercaDeBtnActionPerformed
