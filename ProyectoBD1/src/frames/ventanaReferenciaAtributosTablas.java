@@ -5,6 +5,14 @@
  */
 package frames;
 
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import proyectobd1.Singleton;
+
 /**
  *
  * @author Gerald
@@ -34,12 +42,18 @@ public class ventanaReferenciaAtributosTablas extends javax.swing.JFrame {
         txAResultado = new javax.swing.JTextArea();
         txfNombreTabla = new javax.swing.JTextField();
         btnEjecutar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Nombre tabla:");
 
         jButton1.setText("Atras");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         txAResultado.setColumns(20);
         txAResultado.setRows(5);
@@ -52,6 +66,13 @@ public class ventanaReferenciaAtributosTablas extends javax.swing.JFrame {
         });
 
         btnEjecutar.setText("Ejecutar");
+        btnEjecutar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEjecutarActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Resultado:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -63,15 +84,17 @@ public class ventanaReferenciaAtributosTablas extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 922, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(275, 275, 275)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(txfNombreTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(132, 132, 132)
-                        .addComponent(btnEjecutar)))
+                        .addComponent(btnEjecutar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 922, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -84,11 +107,10 @@ public class ventanaReferenciaAtributosTablas extends javax.swing.JFrame {
                     .addComponent(txfNombreTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(btnEjecutar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(61, 166, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -111,6 +133,54 @@ public class ventanaReferenciaAtributosTablas extends javax.swing.JFrame {
         this.setVisible(false);
         ventanaFunciones.setVisible(true);
     }//GEN-LAST:event_txfNombreTablaActionPerformed
+
+    private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarActionPerformed
+        // TODO add your handling code here:
+        if(!txfNombreTabla.getText().isEmpty()){
+            if(Singleton.getInstance().getConexionServidor().existeTablaP(txfNombreTabla.getText()) ){
+                ArrayList<String> listaAtributos = Singleton.getInstance().getConexionServidor().obtenerAtributos(txfNombreTabla.getText());
+               
+                for(int i = 0; i < listaAtributos.size(); i++){
+                    txAResultado.append("Nombre\t\tTipo\t\tNotNull\t\tPrimaryKey\t\tForeign Key\t\tUnique\t\tCheck\n");
+                    try {
+                        ArrayList<ArrayList<String>> result =Singleton.getInstance().getConexionServidor().definicionTabla(txfNombreTabla.getText());
+                        for(int k = 0; k < result.size(); k++){
+                            if(result.get(k).get(0).equals(listaAtributos.get(i))){
+                                String propiedades = "";
+                                for(int j = 0; j < result.get(k).size(); j++){
+                                    propiedades += (result.get(k).get(j)+"\t\t");
+                                }
+                                txAResultado.append(propiedades+"\n");
+                            }
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ventanaReferenciaAtributosTablas.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    for(int j = 0; j < Singleton.getInstance().getConexionServidor().listaTablas.size(); j++){
+                        ArrayList<String> listaRevisar = Singleton.getInstance().getConexionServidor().obtenerAtributos(Singleton.getInstance().getConexionServidor().listaTablas.get(j).getNombre());
+                        if(!Singleton.getInstance().getConexionServidor().listaTablas.get(j).getNombre().equals(txfNombreTabla.getText()) && listaRevisar.contains(listaAtributos.get(i))){
+                            txAResultado.append("Tabla que se relaciona: "+Singleton.getInstance().getConexionServidor().listaTablas.get(j).getNombre()+"\n");
+                        }
+                    }
+                    txAResultado.append("\n");
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "No existe la tabla que introdujo"
+                                            , "Error tabla no existe", JOptionPane.ERROR_MESSAGE);
+            }     
+        }else{
+            JOptionPane.showMessageDialog(this, "No introdujo ninguna tabla"
+                                            , "Error no hay tabla", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEjecutarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        MenuFunciones ventanaFunciones = new MenuFunciones();
+        this.setVisible(false);
+        ventanaFunciones.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,6 +221,7 @@ public class ventanaReferenciaAtributosTablas extends javax.swing.JFrame {
     private javax.swing.JButton btnEjecutar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txAResultado;

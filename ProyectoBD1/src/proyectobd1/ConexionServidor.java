@@ -30,7 +30,7 @@ public class ConexionServidor {
     public DatabaseMetaData metaDatos;
     public ResultSetMetaData rsCantidadColumnas;
     //public ArrayList<String> listaTablas;
-    ArrayList<Tabla> listaTablas;
+    public ArrayList<Tabla> listaTablas;
     
     public ConexionServidor(){
         
@@ -530,4 +530,5 @@ public class ConexionServidor {
         }
         return true;
     }
+    
 }
