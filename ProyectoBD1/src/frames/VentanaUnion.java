@@ -25,7 +25,7 @@ public class VentanaUnion extends javax.swing.JFrame {
     public VentanaUnion(OperacionesAlgebraRelacional pVentanaOperaciones) {
         initComponents();
         this.ventanaOperaciones = pVentanaOperaciones;
-        this.setTitle("Realización de Union");
+        this.setTitle("Realización de Unión");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }

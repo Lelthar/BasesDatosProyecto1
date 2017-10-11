@@ -262,7 +262,7 @@ public class VentanaNaturalJoin extends javax.swing.JFrame {
                                     this.jTextAreaSql.setText(consA+"\n \nNombre de la tabla resultado: "+jTextFieldResul.getText());
                                     this.jTextAreaAlg.setText(algebra);
                                 }else{
-                                    JOptionPane.showMessageDialog(this, "Las tablas no tiene atributos comunes"
+                                    JOptionPane.showMessageDialog(this, "Las tablas no tienen 2 o más atributos comunes"
                                         , "No atributos comunes", JOptionPane.ERROR_MESSAGE);
                                 }        
                             } catch (SQLException ex) {
@@ -340,7 +340,7 @@ public class VentanaNaturalJoin extends javax.swing.JFrame {
                                 Singleton.getInstance().getAdministrador().tablaNaturalJoin(this);
                                 
                             }else{
-                                JOptionPane.showMessageDialog(this, "Las tablas no tiene atributos comunes"
+                                JOptionPane.showMessageDialog(this, "Las tablas no tienen 2 o más atributos comunes"
                                     , "No atributos comunes", JOptionPane.ERROR_MESSAGE);
                             } 
                         } catch (SQLException ex) {

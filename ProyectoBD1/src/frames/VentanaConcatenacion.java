@@ -26,7 +26,7 @@ public class VentanaConcatenacion extends javax.swing.JFrame {
     public VentanaConcatenacion(OperacionesAlgebraRelacional pVentanaOperaciones) {
         initComponents();
         this.ventanaOperaciones = pVentanaOperaciones;
-        this.setTitle("Realización de Intersección");
+        this.setTitle("Realización de Concatenación");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
