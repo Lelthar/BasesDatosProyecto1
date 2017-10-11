@@ -26,7 +26,7 @@ public class VentanaRenombrarAtributos extends javax.swing.JFrame {
     public VentanaRenombrarAtributos(OperacionesAlgebraRelacional pVentanaOperaciones) {
         initComponents();
         this.ventanaOperaciones = pVentanaOperaciones;
-        this.setTitle("Realización de División");
+        this.setTitle("Realización de Renombrar Atributos tabla");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }

@@ -5,6 +5,11 @@
  */
 package frames;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import proyectobd1.Singleton;
+
 /**
  *
  * @author Gerald
@@ -47,8 +52,11 @@ public class MenuFunciones extends javax.swing.JFrame {
         verReferenciaCruzadaAtributoTablaBtn = new javax.swing.JButton();
         acercaDeBtn = new javax.swing.JButton();
         salirBtn = new javax.swing.JButton();
+        cambiarUsuarioBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(201, 216, 253));
 
         ayudaBtn.setText("Ayuda");
         ayudaBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -99,13 +107,21 @@ public class MenuFunciones extends javax.swing.JFrame {
             }
         });
 
+        cambiarUsuarioBtn.setText("Cambiar usuario");
+        cambiarUsuarioBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambiarUsuarioBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(253, 253, 253)
+                .addGap(76, 76, 76)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cambiarUsuarioBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(salirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(acercaDeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(verReferenciaCruzadaAtributoTablaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -113,12 +129,12 @@ public class MenuFunciones extends javax.swing.JFrame {
                     .addComponent(tablasBaseDatosBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(operacionesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ayudaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(22, 22, 22)
                 .addComponent(operacionesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(tablasBaseDatosBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -127,12 +143,14 @@ public class MenuFunciones extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addComponent(verReferenciaCruzadaAtributoTablaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
+                .addComponent(cambiarUsuarioBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(ayudaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(acercaDeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(salirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -182,6 +200,9 @@ public class MenuFunciones extends javax.swing.JFrame {
 
     private void acercaDeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acercaDeBtnActionPerformed
         // TODO add your handling code here:
+        VentanaAcercaDe ventanaAcercaDe = new VentanaAcercaDe();
+        this.setVisible(false);
+        ventanaAcercaDe.setVisible(true);
     }//GEN-LAST:event_acercaDeBtnActionPerformed
 
     private void salirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBtnActionPerformed
@@ -189,6 +210,18 @@ public class MenuFunciones extends javax.swing.JFrame {
         dispose();
         System.exit(0);                   
     }//GEN-LAST:event_salirBtnActionPerformed
+
+    private void cambiarUsuarioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarUsuarioBtnActionPerformed
+        try {
+            // TODO add your handling code here:
+            Singleton.getInstance().getConexionServidor().con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuFunciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        servidor nuevoLogin = new servidor();
+        this.setVisible(false);
+        nuevoLogin.setVisible(true);
+    }//GEN-LAST:event_cambiarUsuarioBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,6 +262,7 @@ public class MenuFunciones extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acercaDeBtn;
     private javax.swing.JButton ayudaBtn;
+    private javax.swing.JButton cambiarUsuarioBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton operacionesBtn;
     private javax.swing.JButton salirBtn;
